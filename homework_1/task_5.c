@@ -1,37 +1,37 @@
 #include <stdio.h>
+#include <malloc.h>
+#include <stdbool.h>
 
 int main()
 {
     int n = 0;
     scanf("%d", &n);
-    int array[n];
+    int* array = malloc(n * sizeof(int));
     for (int i = 0; i != n; ++i) {
         scanf("%d", &array[i]);
     }
-    for (int i = 0; i != n - 1; ++i) {
-        for (int j = 0; j != n - i - 1; ++j) {
-            if (array[j] > array[j + 1]) {
-                int temporary = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temporary;
-            }
-        }
-    }
-    int maximum = -2147483648, last = array[n - 1];
-    for (int i = n - 2; i != -1; --i) {
-        if (array[i] == last) {
-            if (array[i] > maximum) {
-                maximum = array[i];
+    int maximum = -2147483648, count = 0, j = 0, current = 0;
+    for (int i = 0; i < n - 1; ++i) {
+        j = i + 1;
+        bool notFind = true;
+        current = array[i];
+        while (j < n) {
+            if (array[i] == array[j]) {
+                notFind = false;
                 break;
             }
-        } else {
-            last = array[i];
+            j++;
         }
+        if (!notFind)
+            if (current > maximum)
+                maximum = current;
+
     }
     if (maximum == -2147483648) {
         printf("there are no such elements");
         return 0;
     }
     printf("%d", maximum);
+    free(array);
     return 0;
 }

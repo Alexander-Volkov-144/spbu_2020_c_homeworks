@@ -1,10 +1,14 @@
 #include <stdio.h>
+#include <malloc.h>
 
 int main()
 {
     int n = 0;
     scanf("%d", &n);
-    int array[n][n];
+    int** array = malloc(n * sizeof(int));
+    for (int i = 0; i != n; ++i) {
+        array[i] = malloc(n * sizeof(int));
+    }
     for (int i = 0; i != n; ++i) {
         for (int j = 0; j != n; ++j) {
             scanf("%d", &array[i][j]);
@@ -14,7 +18,7 @@ int main()
     printf("%d ", array[row][column]);
     if (n == 1)
         return 0;
-    while (1) {
+    while (l < n) {
         for (int i = 0; i < l; ++i) {
             column--;
             printf("%d ", array[row][column]);
@@ -41,5 +45,9 @@ int main()
             break;
         }
     }
+    for (int i = 0; i != n; ++i) {
+        free(array[i]);
+    }
+    free(array);
     return 0;
 }

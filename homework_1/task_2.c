@@ -1,30 +1,21 @@
 #include <stdio.h>
+#include <malloc.h>
+#include "../library/commonUtils/reverseArray.h"
 
 int main()
 {
     int n = 0, m = 0;
     scanf("%d%d", &m, &n);
-    int array[n];
+    int* array = malloc(n * sizeof(int));
     for (int i = 0; i != n; ++i) {
         scanf("%d", &array[i]);
     }
-    for (int i = 0; i != n / 2; ++i) {
-        int temporary = array[i];
-        array[i] = array[n - i - 1];
-        array[n - i - 1] = temporary;
-    }
-    for (int i = 0; i != (n - m) / 2; ++i) {
-        int temporary = array[i];
-        array[i] = array[n - m - i - 1];
-        array[n - m - i - 1] = temporary;
-    }
-    for (int i = 0; i != m / 2; ++i) {
-        int temporary = array[n - m + i];
-        array[n - m + i] = array[n - 1 - i];
-        array[n - 1 - i] = temporary;
-    }
+    reverseArray(array, array + n - 1);
+    reverseArray(array, array + n - m - 1);
+    reverseArray(array + n - m, array + n - 1);
     for (int i = 0; i != n; ++i) {
         printf("%d ", array[i]);
     }
+    free(array);
     return 0;
 }
