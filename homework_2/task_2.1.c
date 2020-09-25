@@ -3,7 +3,7 @@
 
 void printRepresentation(int* representation)
 {
-    int i = 0;//переменная объявлена вне цикла, чтобы было проще печатать последее слагаемое
+    int i = 0; // переменная объявлена вне цикла, чтобы было проще печатать последее слагаемое
     for (; representation[i + 1] != 0; i++) {
         printf("%d + ", representation[i]);
     }
@@ -15,13 +15,13 @@ void generateNextTerm(int* representation, int num, int sum)
 {
     if (sum <= 0) {
         for (int i = num; representation[i] != 0; ++i) {
-            representation[i] = 0;//обнуляются ячейки, идущие далее, чтобы не печатались лишние слагаемые
+            representation[i] = 0; // обнуляются ячейки, идущие далее, чтобы не печатались лишние слагаемые
         }
-        printRepresentation(representation);//печать
+        printRepresentation(representation); // печать
     } else {
         for (int i = representation[num - 1]; i > 0; --i) {
             if (sum - i >= 0) {
-                representation[num] = i;//добавление в массив следующего слагаемого
+                representation[num] = i; // добавление в массив следующего слагаемого
                 generateNextTerm(representation, num + 1, sum - i);
             }
         }
