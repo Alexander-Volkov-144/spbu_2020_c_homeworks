@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <mem.h>
+#include <stdio.h>
 
 int next(int* sol, int num, int sum)
 {
