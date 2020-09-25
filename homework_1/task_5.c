@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 int main()
 {
@@ -22,9 +22,8 @@ int main()
             }
             j++;
         }
-        if (!notFind)
-            if (current > maximum)
-                maximum = current;
+        if (!notFind && current > maximum)
+            maximum = current;
 
     }
     if (maximum == -2147483648) {
