@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <mem.h>
 
 int next(int* sol, int num, int sum)
 {
     if (sum <= 0) {
-        for(int j = num; sol[j] != 0; j++){
+        for (int j = num; sol[j] != 0; j++) {
             sol[num] = 0;
         }
         int i = 0;
@@ -27,7 +26,9 @@ int main()
     int n;
     scanf("%d", &n);
     int sol[n + 1];
-    memset(sol, 0, (n + 1) * sizeof(int));
+    for (int i = 0; i != n + 1; ++i) {
+        sol[i] = 0;
+    }
     for (int i = n - 1; i != 0; i--) {
         sol[0] = i;
         next(sol, 1, n - i);
