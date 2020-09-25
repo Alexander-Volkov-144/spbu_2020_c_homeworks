@@ -1,5 +1,5 @@
-#include <malloc.h>
 #include "../library/commonUtils/reverseArray.h"
+#include <malloc.h>
 #include <stdio.h>
 
 int main()
