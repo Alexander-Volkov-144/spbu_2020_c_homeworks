@@ -4,7 +4,7 @@
 int next(int* sol, int num, int sum)
 {
     if (sum <= 0) {
-        for (int j = num; sol[j] != 0; j++){
+        for (int j = num; sol[j] != 0; j++) {
             sol[num] = 0;
         }
         int i = 0;
