@@ -24,7 +24,6 @@ int main()
         }
         if (!notFind && current > maximum)
             maximum = current;
-
     }
     if (maximum == -2147483648) {
         printf("there are no such elements");
