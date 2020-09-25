@@ -1,6 +1,6 @@
-#include <stdio.h>
 #include <malloc.h>
 #include "../library/commonUtils/reverseArray.h"
+#include <stdio.h>
 
 int main()
 {
