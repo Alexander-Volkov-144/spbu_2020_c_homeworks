@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int maxSize = 20;  // 20 - максимальное количество цифр в числе, которое может быть записано в  unsigned long long
+int maxSize = 20; // 20 - максимальное количество цифр в числе, которое может быть записано в  unsigned long long
 
 int fillArray(int* array, unsigned long long x)
 {
