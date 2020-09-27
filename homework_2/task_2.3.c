@@ -20,7 +20,6 @@ void zeroShift(int* array, int n)
     }
 }
 
-
 int main()
 {
     int n = 0;
