@@ -23,13 +23,13 @@ void swap(int* x, int* y) // функция, меняющая местами д�
 
 int compare(const void* x, const void* y) // функция, сравнивающая два элемента массива для qsort
 {
-    return *(int*) x - *(int*) y;
+    return *(int*)x - *(int*)y;
 }
 
 void zeroMove(int* array)
 {
     int i = 1;
-    while (array[i] == 0){
+    while (array[i] == 0) {
         ++i;
     }
     swap(&array[0], &array[i]);
