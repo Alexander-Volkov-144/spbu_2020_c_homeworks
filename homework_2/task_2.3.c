@@ -1,13 +1,25 @@
-#include <malloc.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void swap(int* x, int* y)
+void swap(int* x, int* y) // функция, меняющая местами элементы
 {
     int tmp = *x;
     *x = *y;
     *y = tmp;
-    return;
 }
+
+void zeroShift(int* array, int n)
+{ // функция, двигающая нули в конец
+    for (int i = 0, j = 0; i < n; ++i) {
+        if (array[i] != 0) {
+            if (j < i) {
+                swap(&array[j], &array[i]);
+            }
+            ++j;
+        }
+    }
+}
+
 
 int main()
 {
@@ -19,16 +31,7 @@ int main()
     for (int i = 0; i < n; ++i) {
         scanf("%d", &array[i]);
     }
-    for (int i = 0; i < n - 1; ++i) {
-        if (array[i] == 0) {
-            for (int j = i + 1; j < n; ++j) {
-                if (array[j] != 0) {
-                    swap(&array[i], &array[j]); // если элемент равен нулю, то он заменяется на ближайший ненулевой
-                    break;
-                }
-            }
-        }
-    }
+    zeroShift(array, n);
     for (int i = 0; i < n; ++i) {
         printf("%d ", array[i]);
     }
