@@ -29,7 +29,7 @@ int compare(const void* x, const void* y) // функция, сравниваю�
 void zeroMove(int* array)
 {
     int i = 1;
-    while (array[i] == 0){
+    while (array[i] == 0) {
         ++i;
     }
     swap(&array[0], &array[i]);
