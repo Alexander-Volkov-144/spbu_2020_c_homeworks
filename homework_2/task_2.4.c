@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-int maxSize = 20; // 20 - максимальное количество цифр в числе, которое может быть записано в  unsigned long long
+const int maxSize = 20; // 20 - максимальное количество цифр в числе, которое может быть записано в  unsigned long long
 
 int fillArray(int* array, unsigned long long x)
 {
@@ -26,7 +27,7 @@ int compare(const void* x, const void* y) // функция, сравниваю�
     return *(int*)x - *(int*)y;
 }
 
-void zeroMove(int* array)
+void moveFirstZero(int* array)
 {
     int i = 1;
     while (array[i] == 0) {
@@ -38,16 +39,14 @@ void zeroMove(int* array)
 int main()
 {
     int numbers[maxSize];
-    for (int i = 0; i < maxSize; ++i) {
-        numbers[i] = 0;
-    }
+    memset(numbers, 0, maxSize * sizeof(int));
     unsigned long long x = 0;
     printf("enter a natural number\n");
-    scanf("%d", &x);
+    scanf("%llu", &x);
     int n = fillArray(numbers, x);
     qsort(numbers, n, sizeof(int), compare);
     if (numbers[0] == 0)
-        zeroMove(numbers);
+        moveFirstZero(numbers);
     for (int i = 0; i < n; ++i) {
         printf("%d", numbers[i]);
     }
