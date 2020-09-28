@@ -7,11 +7,40 @@
 
 const int N = 10; // количество цифр
 
+int readingNumberOfDigits() // функция, считывающая количество знаков в числе
+{
+    int n = 0;
+    printf("enter the quantity of digits in the number that you will guess (from 4 to 9)\n");
+    scanf("%d", &n);
+    while (n < 4 || n > 9) {
+        printf("please enter the number between four and nine\n");
+        scanf("%d", &n);
+    }
+    return n;
+}
+
+bool isCorrectNumberOfDigits(int x, int n) // функция проверяет, что пользователь ввел число с необходимым количеством цифр
+{
+    return x / pow(10, n - 1) >= 1 && (int) (x / pow(10, n - 1)) <= 9;
+}
+
+int readingCurrentAssumptiveNumber(int n)
+{
+    int x = 0;
+    scanf("%d", &x);
+    while (!isCorrectNumberOfDigits(x, n)) { // проверяется, что пользователь ввел число с необходимым количеством цифр
+        printf("please enter a %d-digit number\n", n);
+        scanf("%d", &x);
+    }
+    return x;
+}
+
 void generateRandomArray(int* array, int n)
 {
     bool* digits = malloc(N * sizeof(bool)); // создается массив для цифр
-    memset(digits, 0, N * sizeof(bool));
+    memset(digits, false, N * sizeof(bool));
     int currentFigure = 0;
+    srand(time(NULL));
     do { // необходимо, чтобы первая цифра была ненулевой
         currentFigure = rand() % 10;
     } while (currentFigure == 0);
@@ -33,11 +62,6 @@ void makeArrayFromNumber(int* numbers, int x, int n) // функция прев�
     }
 }
 
-bool isCorrectNumberOfDigits(int x, int n) // функция проверяет, что пользователь ввел число с необходимым количеством цифр
-{
-    return x / pow(10, n - 1) >= 1 && x / pow(10, n - 1) <= 9;
-}
-
 void checkNumberOfMatches(int* hiddenNumbers, int* assumptiveNumbers, int* a, int* b, int n)
 {
     for (int i = 0; i < n; ++i) {
@@ -51,16 +75,10 @@ void checkNumberOfMatches(int* hiddenNumbers, int* assumptiveNumbers, int* a, in
 
 int main()
 {
-    srand(time(NULL));
     int n = 0;
-    printf("enter the quantity of digits in the number that you will guess (from 4 to 9)\n");
-    scanf("%d", &n);
-    while (n < 4 || n > 9) {
-        printf("please enter the number between four and nine\n");
-        scanf("%d", &n);
-    }
-    int* hiddenNumbers = malloc(n * sizeof(int)); // создается массив для числа, которое нужно угадать
+    n = readingNumberOfDigits();
     int* assumptiveNumbers = malloc(n * sizeof(int)); // создается массив для числа, которое будет предлагать игрок
+    int* hiddenNumbers = malloc(n * sizeof(int)); // создается массив для числа, которое нужно угадать
     generateRandomArray(hiddenNumbers, n); // вызывается функция для генерации случайного числа
     printf("A - number of full matches, B - number of partial matches (wrong position)\n");
     printf("enter the number\n");
@@ -68,17 +86,13 @@ int main()
     while (a != n) {
         a = 0; // обнуляются счетчики
         b = 0;
-        scanf("%d", &x);
-        while (!isCorrectNumberOfDigits(x, n)) { // проверяется, что пользователь ввел число с необходимым количеством цифр
-            printf("please enter a %d-digit number\n", n);
-            scanf("%d", &x);
-        }
+        x = readingCurrentAssumptiveNumber(n);
         makeArrayFromNumber(assumptiveNumbers, x, n); // число записывается в массив
         checkNumberOfMatches(hiddenNumbers, assumptiveNumbers, &a, &b, n); // проверяет количество совпадающих значений
-        printf("A%dB%d\n", a, b);
+        printf("A - %d, B - %d\n", a, b);
     }
     printf("you win");
-    free(hiddenNumbers);
     free(assumptiveNumbers);
+    free(hiddenNumbers);
     return 0;
 }
