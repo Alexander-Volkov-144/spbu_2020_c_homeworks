@@ -21,7 +21,7 @@ int readingNumberOfDigits() // функция, считывающая колич
 
 bool isCorrectNumberOfDigits(int x, int n) // функция проверяет, что пользователь ввел число с необходимым количеством цифр
 {
-    return x / pow(10, n - 1) >= 1 && (int) (x / pow(10, n - 1)) <= 9;
+    return x / pow(10, n - 1) >= 1 && (int)(x / pow(10, n - 1)) <= 9;
 }
 
 int readingCurrentAssumptiveNumber(int n)
