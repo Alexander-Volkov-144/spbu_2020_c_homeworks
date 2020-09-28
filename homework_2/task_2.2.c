@@ -1,44 +1,52 @@
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
-void randomArray(int* array, int n)
+const int N = 10; // количество цифр
+
+void generateRandomArray(int* array, int n)
 {
-    bool digits[10]; // создается массив для цифр
-    for (int i = 0; i < 10; ++i) {
-        digits[i] = true; // в каждую ячейку записывается true, что означает, что цифра еще не использовалась
-    }
-    int r = 0;
-    while (r == 0) { // необходимо, чтобы первая цифра была ненулевой
-        r = rand() % 10;
-    }
-    array[0] = r;
-    digits[r] = false;
-    for (int i = 1; i < n; ++i) {
-        while (!digits[r]) { // находится цифра, которая еще не использовалась
-            r = rand() % 10;
+    bool* digits = malloc(N * sizeof(bool)); // создается массив для цифр
+    memset(digits, 0, N * sizeof(bool));
+    int currentFigure = 0;
+    do { // необходимо, чтобы первая цифра была ненулевой
+        currentFigure = rand() % 10;
+    } while (currentFigure == 0);
+    for (int i = 0; i < n; ++i) {
+        while (digits[currentFigure]) { // находится цифра, которая еще не использовалась
+            currentFigure = rand() % 10;
         }
-        digits[r] = false; // эту цифру больше нельзя использовать
-        array[i] = r;
+        digits[currentFigure] = true; // эту цифру больше нельзя использовать
+        array[i] = currentFigure;
     }
+    free(digits);
 }
 
-void generate(int* array, int x, int n) // функция превращает число в массив с цифрами этого числа
+void makeArrayFromNumber(int* numbers, int x, int n) // функция превращает число в массив с цифрами этого числа
 {
     for (int i = n - 1; i > -1; --i) {
-        array[i] = x % 10;
+        numbers[i] = x % 10;
         x /= 10;
     }
 }
 
-bool check(int x, int n) // функция проверяет, что пользователь ввел число с необходимым количеством цифр
+bool isCorrectNumberOfDigits(int x, int n) // функция проверяет, что пользователь ввел число с необходимым количеством цифр
 {
-    while (x > 0) {
-        x /= 10;
-        --n;
+    return x / pow(10, n - 1) >= 1 && x / pow(10, n - 1) <= 9;
+}
+
+void checkNumberOfMatches(int* hiddenNumbers, int* assumptiveNumbers, int* a, int* b, int n)
+{
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (hiddenNumbers[i] == assumptiveNumbers[j]) { // проверяется совпадение элементов двух массивов
+                i == j ? ++*a : ++*b;
+            }
+        }
     }
-    return n != 0;
 }
 
 int main()
@@ -51,9 +59,9 @@ int main()
         printf("please enter the number between four and nine\n");
         scanf("%d", &n);
     }
-    int* hidden = malloc(n * sizeof(int)); // создается массив для числа, которое нужно угадать
-    int* assumption = malloc(n * sizeof(int)); // создается массив для числа, которое будет предлагать игрок
-    randomArray(hidden, n); // вызывается функция для генерации случайного числа
+    int* hiddenNumbers = malloc(n * sizeof(int)); // создается массив для числа, которое нужно угадать
+    int* assumptiveNumbers = malloc(n * sizeof(int)); // создается массив для числа, которое будет предлагать игрок
+    generateRandomArray(hiddenNumbers, n); // вызывается функция для генерации случайного числа
     printf("A - number of full matches, B - number of partial matches (wrong position)\n");
     printf("enter the number\n");
     int a = 0, b = 0, x = 0;
@@ -61,26 +69,16 @@ int main()
         a = 0; // обнуляются счетчики
         b = 0;
         scanf("%d", &x);
-        while (check(x, n)) { // проверяется, что пользователь ввел число с необходимым количеством цифр
+        while (!isCorrectNumberOfDigits(x, n)) { // проверяется, что пользователь ввел число с необходимым количеством цифр
             printf("please enter a %d-digit number\n", n);
             scanf("%d", &x);
         }
-        generate(assumption, x, n); // число записывается в массив
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (hidden[i] == assumption[j]) { // проверяется совпадение элементов двух массивов
-                    b += 1;
-                    if (i == j) {
-                        b -= 1;
-                        a += 1;
-                    }
-                }
-            }
-        }
+        makeArrayFromNumber(assumptiveNumbers, x, n); // число записывается в массив
+        checkNumberOfMatches(hiddenNumbers, assumptiveNumbers, &a, &b, n); // проверяет количество совпадающих значений
         printf("A%dB%d\n", a, b);
     }
     printf("you win");
-    free(hidden);
-    free(assumption);
+    free(hiddenNumbers);
+    free(assumptiveNumbers);
     return 0;
 }
