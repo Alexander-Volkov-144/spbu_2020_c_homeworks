@@ -29,7 +29,7 @@ int readingCurrentAssumptiveNumber(int n)
     int x = 0;
     scanf("%d", &x);
     while (!isCorrectNumberOfDigits(x, n)) { // проверяется, что пользователь ввел число с необходимым количеством цифр
-        printf("please enter a %d-digit number\n", n);
+        printf("please enter a %d-digit number, that does not start with zero\n", n);
         scanf("%d", &x);
     }
     return x;
