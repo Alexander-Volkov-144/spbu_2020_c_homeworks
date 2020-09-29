@@ -8,3 +8,4 @@ set(SOURCE_LIB
 )
 add_library(library ${SOURCE_LIB})
 add_executable(task_2.4 homework_2/task_2.4.c)
+add_executable(task_2.5 homework_2/task_2.5.c)
