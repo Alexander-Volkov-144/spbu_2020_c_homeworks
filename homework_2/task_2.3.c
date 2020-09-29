@@ -8,7 +8,7 @@ void swap(int* x, int* y) // функция, меняющая местами э�
     *y = tmp;
 }
 
-void zeroShift(int* array, int n)
+void shiftZeros(int* array, int n)
 { // функция, двигающая нули в конец
     for (int i = 0, j = 0; i < n; ++i) {
         if (array[i] != 0) {
@@ -30,7 +30,7 @@ int main()
     for (int i = 0; i < n; ++i) {
         scanf("%d", &array[i]);
     }
-    zeroShift(array, n);
+    shiftZeros(array, n);
     for (int i = 0; i < n; ++i) {
         printf("%d ", array[i]);
     }
