@@ -24,7 +24,6 @@ int main()
                     if (array[i] > maximum)
                         maximum = array[i];
                 }
-
             }
         }
     }
