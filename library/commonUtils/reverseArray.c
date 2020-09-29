@@ -1,13 +1,10 @@
 #include "reverseArray.h"
-#include <malloc.h>
 
-void reverseArray(int* begin, int* end)
+void reverseArray(int* array, int length)
 {
-    int n = end - begin + 1;
-    for (int i = 0; i != n / 2; ++i) {
-        int tmp = begin[i];
-        begin[i] = begin[n - 1 - i];
-        begin[n - 1 - i] = tmp;
+    for (int i = 0; i != length / 2; ++i) {
+        int tmp = array[i];
+        array[i] = array[length - 1 - i];
+        array[length - 1 - i] = tmp;
     }
-    return;
 };

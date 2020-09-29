@@ -1,6 +1,6 @@
 #ifndef SPBU_2020_C_HOMEWORKS_REVERSEARRAY_H
 #define SPBU_2020_C_HOMEWORKS_REVERSEARRAY_H
 
-void reverseArray(int* begin, int* end);
+void reverseArray(int* array, int length);
 
 #endif //SPBU_2020_C_HOMEWORKS_REVERSEARRAY_H

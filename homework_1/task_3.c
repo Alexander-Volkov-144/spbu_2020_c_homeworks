@@ -1,24 +1,22 @@
 #include <stdio.h>
 
+const int MAX_LENGTH = 2048;
+
 int main()
 {
-    char s1[2048], s2[2048];
+    char s1[MAX_LENGTH], s2[MAX_LENGTH];
+    printf("enter s1\n");
     scanf("%s", &s1);
+    printf("enter s2\n");
     scanf("%s", &s2);
     int i = 0, count = 0;
-    while (s1[i] != '\0') {
+    for (int i = 0; s1[i] != '\0'; ++i) {
         if (s1[i] == s2[0]) {
             int j = 1;
-            while (s2[j] != '\0') {
-                if (s2[j] != s1[i + j]) {
-                    break;
-                }
-                j++;
-            }
+            for (; s1[i + j] == s2[j] && s2[j] != '\0'; ++j); // второе условие нужно, чтобы не выйти за строку
             if (s2[j] == '\0')
-                count++;
+                ++count;
         }
-        i++;
     }
     printf("%d", count);
     return 0;

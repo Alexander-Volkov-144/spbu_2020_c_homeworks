@@ -1,35 +1,37 @@
-#include <malloc.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
     int n = 0;
+    printf("enter the number of elements in the array\n");
     scanf("%d", &n);
     int* array = malloc(n * sizeof(int));
+    printf("enter array elements\n");
     for (int i = 0; i != n; ++i) {
         scanf("%d", &array[i]);
     }
-    int maximum = -2147483648, count = 0, j = 0, current = 0;
+    bool isFind = false; // переменная, указываюшая, найден ли максимум
+    int maximum = 0, count = 0, j = 0, current = 0;
     for (int i = 0; i < n - 1; ++i) {
-        j = i + 1;
-        bool notFind = true;
-        current = array[i];
-        while (j < n) {
+        for (int j = i + 1; j < n; ++j) {
             if (array[i] == array[j]) {
-                notFind = false;
-                break;
+                if (!isFind) {
+                    maximum = array[i];
+                    isFind = true;
+                } else {
+                    if (array[i] > maximum)
+                        maximum = array[i];
+                }
+
             }
-            j++;
         }
-        if (!notFind && current > maximum)
-            maximum = current;
     }
-    if (maximum == -2147483648) {
+    if (!isFind)
         printf("there are no such elements");
-        return 0;
-    }
-    printf("%d", maximum);
+    else
+        printf("%d", maximum);
     free(array);
     return 0;
 }
