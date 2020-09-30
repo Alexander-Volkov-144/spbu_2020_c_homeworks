@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 const int maxSize = 20; // 20 - максимальное количество цифр в числе, которое может быть записано в  unsigned long long
 
@@ -38,8 +37,7 @@ void moveFirstZero(int* array)
 
 int main()
 {
-    int numbers[maxSize];
-    memset(numbers, 0, maxSize * sizeof(int));
+    int numbers[maxSize] = { 0 };
     unsigned long long x = 0;
     printf("enter a natural number\n");
     scanf("%llu", &x);
