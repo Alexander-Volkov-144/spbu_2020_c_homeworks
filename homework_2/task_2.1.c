@@ -32,7 +32,7 @@ int main()
     int n = 0;
     printf("enter a natural number greater than 1\n");
     scanf("%d", &n);
-    int* representation = (int*) calloc(n + 1, sizeof(int));
+    int* representation = (int*)calloc(n + 1, sizeof(int));
     for (int i = n - 1; i > 0; --i) {
         representation[0] = i;
         generateNextTerm(representation, 1, n - i);
