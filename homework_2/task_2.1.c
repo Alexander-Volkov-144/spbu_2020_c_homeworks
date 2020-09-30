@@ -1,5 +1,6 @@
-#include <malloc.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void printRepresentation(int* representation)
 {
@@ -8,7 +9,6 @@ void printRepresentation(int* representation)
         printf("%d + ", representation[i]);
     }
     printf("%d\n", representation[i]);
-    return;
 }
 
 void generateNextTerm(int* representation, int num, int sum)
@@ -26,7 +26,6 @@ void generateNextTerm(int* representation, int num, int sum)
             }
         }
     }
-    return;
 }
 
 int main()
@@ -35,9 +34,7 @@ int main()
     printf("enter a natural number greater than 1\n");
     scanf("%d", &n);
     int* representation = malloc(n * sizeof(int));
-    for (int i = 0; i < n + 1; ++i) {
-        representation[i] = 0;
-    }
+    memset(representation, 0, n * sizeof(int));
     for (int i = n - 1; i > 0; --i) {
         representation[0] = i;
         generateNextTerm(representation, 1, n - i);
