@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "list.h"
 
 List* createList()
@@ -71,7 +71,7 @@ ListElement* retrieve(List* list, int position)
     return element;
 }
 
-bool delete(List* list, int position)
+bool delete (List* list, int position)
 {
     ListElement* temporary = NULL;
     if (position == 1) {

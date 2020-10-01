@@ -17,9 +17,9 @@ int main()
     printf("the value of the last element: %d\n", tail(numbers)->value);
     printf("position of element with value 2: %d\n", locate(number2, numbers));
     printf("position of element with value 4: %d\n", locate(number4, numbers));
-    delete(numbers, 1); // с 1 позиции удаляется элемент
+    delete(numbers, 1);
     printList(numbers); // печатается весь список
-    delete(numbers, 2); // с 2 позиции удаляется элемент
+    delete(numbers, 2);
     printList(numbers); // печатается весь список
     insert(number4, 2, numbers); // на позицию 2 добавляется элемент
     printList(numbers); // печатается весь список
