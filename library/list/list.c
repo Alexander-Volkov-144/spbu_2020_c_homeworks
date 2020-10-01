@@ -1,17 +1,17 @@
-#include "list.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "list.h"
 
 List* createList()
 {
-    List* list = (List*) malloc(sizeof(List));
+    List* list = (List*)malloc(sizeof(List));
     list->head = NULL;
     return list;
 }
 
 ListElement* createListElement(int value)
 {
-    ListElement* element = (ListElement*) malloc(sizeof(ListElement));
+    ListElement* element = (ListElement*)malloc(sizeof(ListElement));
     element->value = value;
     element->next = NULL;
     return element;
