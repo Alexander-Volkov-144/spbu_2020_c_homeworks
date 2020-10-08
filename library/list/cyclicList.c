@@ -4,7 +4,7 @@
 
 List* createList()
 {
-    List* list = (List*) malloc(sizeof(List));
+    List* list = (List*)malloc(sizeof(List));
     list->head = NULL;
     list->size = 0;
     return list;
@@ -12,7 +12,7 @@ List* createList()
 
 ListElement* createListElement(int value)
 {
-    ListElement* element = (ListElement*) malloc(sizeof(ListElement));
+    ListElement* element = (ListElement*)malloc(sizeof(ListElement));
     element->value = value;
     element->next = NULL;
     return element;
@@ -77,7 +77,7 @@ ListElement* retrieve(List* list, int position)
     return element;
 }
 
-bool delete(List* list, int position)
+bool delete (List* list, int position)
 {
     ListElement* temporary = NULL;
     if (position == 1) {
