@@ -22,7 +22,6 @@ ListElement* searchNext(ListElement* current, int m)
     return current;
 }
 
-
 int searchForWinPosition(List* positions, int n, int m)
 {
     ListElement* current = tail(positions);

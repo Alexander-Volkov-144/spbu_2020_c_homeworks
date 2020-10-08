@@ -4,7 +4,7 @@
 
 List* createList()
 {
-    List* list = (List*)malloc(sizeof(List));
+    List* list = (List*) malloc(sizeof(List));
     list->head = NULL;
     list->size = 0;
     return list;
@@ -12,7 +12,7 @@ List* createList()
 
 ListElement* createListElement(int value)
 {
-    ListElement* element = (ListElement*)malloc(sizeof(ListElement));
+    ListElement* element = (ListElement*) malloc(sizeof(ListElement));
     element->value = value;
     element->next = NULL;
     return element;
@@ -21,7 +21,7 @@ ListElement* createListElement(int value)
 ListElement* tail(List* list)
 {
     struct ListElement* current = list->head;
-    for(int i = 1; i < list->size; ++i){
+    for (int i = 1; i < list->size; ++i) {
         current = current->next;
     }
     return current;
@@ -37,7 +37,7 @@ bool insert(ListElement* element, int position, List* list)
     if (position == 1) {
         element->next = list->head;
         list->head = element;
-        if (list->size == 0){
+        if (list->size == 0) {
             element->next = element;
         }
         list->size += 1;
@@ -77,7 +77,7 @@ ListElement* retrieve(List* list, int position)
     return element;
 }
 
-bool delete (List* list, int position)
+bool delete(List* list, int position)
 {
     ListElement* temporary = NULL;
     if (position == 1) {
@@ -109,7 +109,7 @@ bool deleteList(List* list)
 {
     ListElement* current = list->head;
     ListElement* temporary = NULL;
-    for(int i = 0; i != list->size; ++i) {
+    for (int i = 0; i != list->size; ++i) {
         temporary = current;
         current = current->next;
         free(temporary);
