@@ -25,14 +25,14 @@ double calculatePartialResult(Stack* numbers, char operation)
 {
     double b = getFirstElementValue(numbers);
     double a = getFirstElementValue(numbers);
-    switch(operation){
-        case '+':
+    switch (operation) {
+        case '+' :
             return a + b;
-        case '-':
+        case '-' :
             return a - b;
-        case '*':
+        case '*' :
             return a * b;
-        case '/':
+        case '/' :
             return a / b;
     }
 };
@@ -44,7 +44,7 @@ double calculateResult(char* expression)
         if ('1' <= expression[i] && expression[i] <= '9') {
             push(numbers, createStackElement(calculateNumber(expression, i)));
         } else {
-            if ('*' <= expression[i] && expression[i] <= '/'){
+            if ('*' <= expression[i] && expression[i] <= '/') {
                 push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
             }
         }
