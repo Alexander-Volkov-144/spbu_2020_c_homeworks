@@ -57,6 +57,7 @@ double calculateResult(char* expression)
 int main()
 {
     char expression[MAX_LENGTH];
+    printf("enter expression in postfix form\n");
     fgets(expression, MAX_LENGTH, stdin);
     printf("%f", calculateResult(expression));
     return 0;
