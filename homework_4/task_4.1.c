@@ -57,7 +57,7 @@ double calculateResult(char* expression)
 int main()
 {
     char expression[MAX_LENGTH];
-    fgets(expression, 2048, stdin);
+    fgets(expression, MAX_LENGTH, stdin);
     printf("%f", calculateResult(expression));
     return 0;
 }
