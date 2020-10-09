@@ -1,7 +1,6 @@
 #include "stackd.h"
 #include <stdlib.h>
 
-
 struct Stack {
     struct StackElement* top;
     int stackSize;

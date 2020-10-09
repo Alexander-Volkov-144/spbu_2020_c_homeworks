@@ -26,14 +26,14 @@ double calculatePartialResult(Stack* numbers, char operation)
     double b = getFirstElementValue(numbers);
     double a = getFirstElementValue(numbers);
     switch (operation) {
-        case '+' :
-            return a + b;
-        case '-' :
-            return a - b;
-        case '*' :
-            return a * b;
-        case '/' :
-            return a / b;
+    case '+':
+        return a + b;
+    case '-':
+        return a - b;
+    case '*':
+        return a * b;
+    case '/':
+        return a / b;
     }
 };
 
