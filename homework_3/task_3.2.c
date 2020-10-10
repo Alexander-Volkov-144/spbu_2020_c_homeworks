@@ -1,20 +1,23 @@
-#include "../library/list/cyclicList.h"
+#include "../library/list/list.h"
 #include <stdio.h>
 
 List* createListWithPositions(int n)
 {
     List* positions = createList();
-    for (int i = 1; i <= n; ++i) {
-        ListElement* temporary = createListElement(i);
+    for (int i = 0; i < n; ++i) {
+        ListElement* temporary = createListElement(i + 1);
         insert(temporary, i, positions);
     }
     return positions;
 }
 
-ListElement* searchNext(ListElement* current, int m)
+ListElement* searchNext(List* list,ListElement* current, int m)
 {
     while (m > 0) {
-        current = current->next;
+        if(current->next == NULL)
+            current = list->head;
+        else
+            current = current->next;
         if (current->value > 0) {
             --m;
         }
@@ -26,11 +29,11 @@ int searchForWinPosition(List* positions, int n, int m)
 {
     ListElement* current = tail(positions);
     while (n > 1) {
-        current = searchNext(current, m);
+        current = searchNext(positions,current, m);
         current->value *= -1;
         --n;
     }
-    return searchNext(current, m)->value;
+    return searchNext(positions ,current, m)->value;
 }
 
 int main()
