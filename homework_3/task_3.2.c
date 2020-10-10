@@ -11,10 +11,10 @@ List* createListWithPositions(int n)
     return positions;
 }
 
-ListElement* searchNext(List* list,ListElement* current, int m)
+ListElement* searchNext(List* list, ListElement* current, int m)
 {
     while (m > 0) {
-        if(current->next == NULL)
+        if (current->next == NULL)
             current = list->head;
         else
             current = current->next;
@@ -29,11 +29,11 @@ int searchForWinPosition(List* positions, int n, int m)
 {
     ListElement* current = tail(positions);
     while (n > 1) {
-        current = searchNext(positions,current, m);
+        current = searchNext(positions, current, m);
         current->value *= -1;
         --n;
     }
-    return searchNext(positions ,current, m)->value;
+    return searchNext(positions, current, m)->value;
 }
 
 int main()
