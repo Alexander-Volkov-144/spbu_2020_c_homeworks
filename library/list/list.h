@@ -27,7 +27,7 @@ int locate(int elementValue, List* list);
 
 ListElement* retrieve(List* list, int position);
 
-bool delete(List* list, int position);
+bool delete (List* list, int position);
 
 void printList(List* list);
 
