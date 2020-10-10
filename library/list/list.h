@@ -10,6 +10,7 @@ typedef struct ListElement{
 
 typedef struct List{
     ListElement* head;
+    int size;
 } List;
 
 List* createList();
@@ -31,5 +32,7 @@ bool delete(List* list, int position);
 void printList(List* list);
 
 bool deleteList(List* list);
+
+int listSize(List* list);
 
 #endif //SPBU_2020_C_HOMEWORKS_LIST_H

@@ -11,13 +11,11 @@ add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.h lib
 add_executable(task_3 homework_1/task_3.c)
 add_executable(task_4 homework_1/task_4.c)
 add_executable(task_5 homework_1/task_5.c)
-
 add_executable(task_2.1 homework_2/task_2.1.c)
 add_executable(task_2.3 homework_2/task_2.3.c)
 add_executable(task_2.5 homework_2/task_2.5.c)
 add_executable(task_2.4 homework_2/task_2.4.c)
 add_executable(task_2.2 homework_2/task_2.2.c)
 target_link_libraries(task_2.2 m)
-
 add_executable(task_3.1 homework_3/task_3.1.c )
 target_link_libraries(task_3.1 list)
