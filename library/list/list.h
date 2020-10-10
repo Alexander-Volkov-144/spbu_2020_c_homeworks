@@ -22,7 +22,7 @@ ListElement* head(List* list);
 
 bool insert(ListElement* element, int position, List* list);
 
-int locate(ListElement* element, List* list);
+int locate(int elementValue, List* list);
 
 ListElement* retrieve(List* list, int position);
 

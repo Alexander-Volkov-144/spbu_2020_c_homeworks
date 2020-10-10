@@ -4,16 +4,20 @@ project(spbu_2020_c_homeworks C)
 set(CMAKE_C_STANDARD 11)
 
 set(SOURCE_LIB library/commonUtils/numericOperations.c)
-add_library(library ${SOURCE_LIB})
+add_library(list STATIC library/list/list.c)
+
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.h library/commonUtils/reverseArray.c)
 add_executable(task_3 homework_1/task_3.c)
 add_executable(task_4 homework_1/task_4.c)
 add_executable(task_5 homework_1/task_5.c)
+
 add_executable(task_2.1 homework_2/task_2.1.c)
 add_executable(task_2.3 homework_2/task_2.3.c)
 add_executable(task_2.5 homework_2/task_2.5.c)
 add_executable(task_2.4 homework_2/task_2.4.c)
 add_executable(task_2.2 homework_2/task_2.2.c)
 target_link_libraries(task_2.2 m)
-add_executable(task_3.1 homework_3/task_3.1.c ./library/list/list.h ./library/list/list.c)
+
+add_executable(task_3.1 homework_3/task_3.1.c )
+target_link_libraries(task_3.1 list)

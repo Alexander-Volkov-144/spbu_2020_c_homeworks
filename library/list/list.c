@@ -33,13 +33,13 @@ ListElement* head(List* list)
 
 bool insert(ListElement* element, int position, List* list)
 {
-    if (position == 1) {
+    if (position == 0) {
         element->next = list->head;
         list->head = element;
         return true;
     }
     ListElement* current = list->head;
-    for (int i = 1; i < position - 1; ++i) {
+    for (int i = 0; i < position ; ++i) {
         if (current->next == NULL)
             return false;
         current = current->next;
@@ -49,12 +49,12 @@ bool insert(ListElement* element, int position, List* list)
     return true;
 }
 
-int locate(ListElement* element, List* list)
+int locate(int elementValue, List* list)
 {
     ListElement* current = list->head;
-    int position = 1;
+    int position = 0;
     while (current != NULL) {
-        if (current->value == element->value)
+        if (current->value == elementValue)
             return position;
         current = current->next;
         ++position;
@@ -65,7 +65,7 @@ int locate(ListElement* element, List* list)
 ListElement* retrieve(List* list, int position)
 {
     ListElement* element = list->head;
-    for (int i = 0; i != position - 1 && element != NULL; i++) {
+    for (int i = 0; i != position && element != NULL; i++) {
         element = element->next;
     }
     return element;
@@ -74,7 +74,7 @@ ListElement* retrieve(List* list, int position)
 bool delete (List* list, int position)
 {
     ListElement* temporary = NULL;
-    if (position == 1) {
+    if (position == 0) {
         temporary = list->head;
         list->head = temporary->next;
         free(temporary);
