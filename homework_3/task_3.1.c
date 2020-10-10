@@ -9,7 +9,7 @@ int main()
     head(numbers);
     tail(numbers);
     retrieve(numbers, 1);
-    delete(numbers, 1);
+    delete (numbers, 1);
     printf("\n");
 
     ListElement* number1 = createListElement(1); // создается элемент1
