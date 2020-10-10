@@ -8,7 +8,7 @@ int main()
     // проверка работы функций на пустом списке
     head(numbers);
     tail(numbers);
-    retrieve(numbers,1);
+    retrieve(numbers, 1);
     delete(numbers, 1);
     printf("\n");
 
@@ -53,7 +53,7 @@ int main()
     printf("position of element with value 5: %d\n", locate(5, numbers));
     printf("\n");
 
-    delete(numbers, 2); // удаляется элемент на позиции 2
+    delete (numbers, 2); // удаляется элемент на позиции 2
     printList(numbers); // печатается весь список
 
     deleteList(numbers); // удаляется список

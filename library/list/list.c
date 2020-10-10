@@ -4,7 +4,7 @@
 
 List* createList()
 {
-    List* list = (List*)malloc(sizeof(List));
+    List* list = (List*) malloc(sizeof(List));
     list->head = NULL;
     list->size = 0;
     return list;
@@ -12,7 +12,7 @@ List* createList()
 
 ListElement* createListElement(int value)
 {
-    ListElement* element = (ListElement*)malloc(sizeof(ListElement));
+    ListElement* element = (ListElement*) malloc(sizeof(ListElement));
     element->value = value;
     element->next = NULL;
     return element;
@@ -20,7 +20,7 @@ ListElement* createListElement(int value)
 
 ListElement* tail(List* list)
 {
-    if(listSize(list)==0){
+    if (listSize(list) == 0) {
         printf("error, the list is empty\n");
         return NULL;
     }
@@ -33,7 +33,7 @@ ListElement* tail(List* list)
 
 ListElement* head(List* list)
 {
-    if(listSize(list)==0){
+    if (listSize(list) == 0) {
         printf("error, the list is empty\n");
         return NULL;
     }
@@ -42,7 +42,7 @@ ListElement* head(List* list)
 
 bool insert(ListElement* element, int position, List* list)
 {
-    if(position > listSize(list) || position < 0)
+    if (position > listSize(list) || position < 0)
         return false;
     if (position == 0) {
         element->next = list->head;
@@ -75,7 +75,7 @@ int locate(int elementValue, List* list)
 
 ListElement* retrieve(List* list, int position)
 {
-    if(position >= listSize(list) || position < 0)
+    if (position >= listSize(list) || position < 0)
         return NULL;
     ListElement* element = list->head;
     for (int i = 0; i != position && element != NULL; i++) {
@@ -84,9 +84,9 @@ ListElement* retrieve(List* list, int position)
     return element;
 }
 
-bool delete (List* list, int position)
+bool delete(List* list, int position)
 {
-    if(position >= listSize(list) || position < 0)
+    if (position >= listSize(list) || position < 0)
         return false;
     ListElement* temporary = NULL;
     if (position == 0) {
@@ -128,6 +128,7 @@ bool deleteList(List* list)
     return true;
 }
 
-int listSize(List* list){
+int listSize(List* list)
+{
     return list->size;
 }
