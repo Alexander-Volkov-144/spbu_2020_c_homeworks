@@ -1,50 +1,50 @@
 #include "../library/list/list.h"
 #include <stdio.h>
 
-List* createListWithPositions(int n)
+List* createListWithPositions(int numberOfPeople)
 {
     List* positions = createList();
-    for (int i = 0; i < n; ++i) {
-        ListElement* temporary = createListElement(i + 1);
-        insert(temporary, i, positions);
+    for (int i = 0; i < numberOfPeople; ++i) {
+        ListElement* elementForThisPosition = createListElement(i + 1);
+        insert(elementForThisPosition, i, positions);
     }
     return positions;
 }
 
-ListElement* searchNext(List* list, ListElement* current, int m)
+ListElement* searchNext(List* positions, ListElement* retiringPosition, int periodicityOfDropout)
 {
-    while (m > 0) {
-        if (current->next == NULL)
-            current = list->head;
+    while (periodicityOfDropout > 0) {
+        if (!isNextElementExist(retiringPosition))
+            retiringPosition = head(positions);
         else
-            current = current->next;
-        if (current->value > 0) {
-            --m;
+            retiringPosition = nextElement(retiringPosition);
+        if (returnElementValue(retiringPosition) > 0) {
+            --periodicityOfDropout;
         }
     }
-    return current;
+    return retiringPosition;
 }
 
-int searchForWinPosition(List* positions, int n, int m)
+int searchForWinPosition(List* positions, int numberOfPeople, int periodicityOfDropout)
 {
-    ListElement* current = tail(positions);
-    while (n > 1) {
-        current = searchNext(positions, current, m);
-        current->value *= -1;
-        --n;
+    ListElement* retiringPosition = tail(positions);
+    while (numberOfPeople > 1) {
+        retiringPosition = searchNext(positions, retiringPosition, periodicityOfDropout);
+        changeElementValue(retiringPosition, returnElementValue(retiringPosition) * -1);
+        --numberOfPeople;
     }
-    return searchNext(positions, current, m)->value;
+    return returnElementValue(searchNext(positions, retiringPosition, periodicityOfDropout));
 }
 
 int main()
 {
-    int m = 0, n = 0;
+    int periodicityOfDropout = 0, numberOfPeople = 0;
     printf("enter the number of people\n");
-    scanf("%d", &n);
+    scanf("%d", &numberOfPeople);
     printf("enter m (every m-th person dies)\n");
-    scanf("%d", &m);
-    List* positions = createListWithPositions(n);
-    printf("winning position: %d", searchForWinPosition(positions, n, m));
+    scanf("%d", &periodicityOfDropout);
+    List* positions = createListWithPositions(numberOfPeople);
+    printf("winning position: %d", searchForWinPosition(positions, numberOfPeople, periodicityOfDropout));
     deleteList(positions);
     return 0;
 }
