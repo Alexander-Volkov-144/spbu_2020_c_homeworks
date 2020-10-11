@@ -23,9 +23,9 @@ int main()
     printf("\n");
 
     // проверка работы функций на списке из 1 элемента
-    printf("the value of the first element:%d\n", head(numbers)->value);
-    printf("the value of the element at position 0: %d\n", retrieve(numbers, 0)->value);
-    printf("the value of the last element: %d\n", tail(numbers)->value);
+    printf("the value of the first element:%d\n", returnElementValue(head(numbers)));
+    printf("the value of the element at position 0: %d\n", returnElementValue(retrieve(numbers, 0)));
+    printf("the value of the last element: %d\n", returnElementValue(tail(numbers)));
     printf("\n");
 
     insert(number2, 1, numbers); // элемент2 добавляется в список
@@ -44,13 +44,13 @@ int main()
     printf("\n");
 
     // проверка работы функций
-    printf("the value of the first element: %d\n", head(numbers)->value);
-    printf("the value of the element at position 2: %d\n", retrieve(numbers, 2)->value);
-    printf("the value of the last element: %d\n", tail(numbers)->value);
+    printf("the value of the first element: %d\n", returnElementValue(head(numbers)));
+    printf("the value of the element at position 2: %d\n", returnElementValue(retrieve(numbers, 2)));
+    printf("the value of the last element: %d\n", returnElementValue(tail(numbers)));
     printf("\n");
 
-    printf("position of element with value 4: %d\n", locate(4, numbers));
-    printf("position of element with value 5: %d\n", locate(5, numbers));
+    printf("position of element with value 4: %d\n", locateByValue(4, numbers));
+    printf("position of element with value 1: %d\n", locate(number1, numbers));
     printf("\n");
 
     delete (numbers, 2); // удаляется элемент на позиции 2

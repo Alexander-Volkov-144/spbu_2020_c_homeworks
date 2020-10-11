@@ -3,15 +3,9 @@
 #ifndef SPBU_2020_C_HOMEWORKS_LIST_H
 #define SPBU_2020_C_HOMEWORKS_LIST_H
 
-typedef struct ListElement{
-    int value;
-    struct ListElement* next;
-} ListElement;
+typedef struct ListElement ListElement;
 
-typedef struct List{
-    ListElement* head;
-    int size;
-} List;
+typedef struct List List;
 
 List* createList();
 
@@ -23,7 +17,9 @@ ListElement* head(List* list);
 
 bool insert(ListElement* element, int position, List* list);
 
-int locate(int elementValue, List* list);
+int locateByValue(int elementValue, List* list);
+
+int locate(ListElement* value, List* list);
 
 ListElement* retrieve(List* list, int position);
 
@@ -34,5 +30,7 @@ void printList(List* list);
 bool deleteList(List* list);
 
 int listSize(List* list);
+
+int returnElementValue(ListElement* element);
 
 #endif //SPBU_2020_C_HOMEWORKS_LIST_H
