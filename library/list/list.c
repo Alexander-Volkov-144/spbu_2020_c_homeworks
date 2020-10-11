@@ -70,7 +70,7 @@ bool insert(ListElement* element, int position, List* list)
     return true;
 }
 
-int locateByValue(int elementValue, List* list)
+int locateByValue(int elementValue, List* list) // для значения
 {
     ListElement* currentElement = list->head;
     int position = 0;
@@ -83,7 +83,7 @@ int locateByValue(int elementValue, List* list)
     return -1; // в списке нет элемента с таким значением
 }
 
-int locate(ListElement* value, List* list)
+int locate(ListElement* value, List* list) // для элемента
 {
     ListElement* current = list->head;
     int position = 0;
