@@ -83,7 +83,8 @@ int locateByValue(int elementValue, List* list)
     return -1; // в списке нет элемента с таким значением
 }
 
-int locate(ListElement* value, List* list){
+int locate(ListElement* value, List* list)
+{
     ListElement* current = list->head;
     int position = 0;
     while (current != NULL) {
