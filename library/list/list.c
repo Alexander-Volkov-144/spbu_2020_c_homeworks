@@ -107,7 +107,7 @@ ListElement* retrieve(List* list, int position)
     return elementAtThisPosition;
 }
 
-bool delete(List* list, int position)
+bool delete (List* list, int position)
 {
     if (position >= listSize(list) || position < 0)
         return false;
