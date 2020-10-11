@@ -107,7 +107,7 @@ ListElement* retrieve(List* list, int position)
     return elementAtThisPosition;
 }
 
-bool delete (List* list, int position)
+bool delete(List* list, int position)
 {
     if (position >= listSize(list) || position < 0)
         return false;
@@ -170,9 +170,12 @@ bool isNextElementExist(ListElement* element)
     return !(element->next == NULL);
 }
 
-ListElement* nextElement(ListElement* element){
+ListElement* nextElement(ListElement* element)
+{
     return element->next;
 }
-void changeElementValue(ListElement* element, int newValue){
+
+void changeElementValue(ListElement* element, int newValue)
+{
     element->value = newValue;
 }
