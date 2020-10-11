@@ -70,7 +70,7 @@ bool insert(ListElement* element, int position, List* list)
     return true;
 }
 
-int locateByValue(int elementValue, List* list) // для значения
+int locateByValue(int elementValue, List* list) // для поиска первого элемента с таким значением
 {
     ListElement* currentElement = list->head;
     int position = 0;
@@ -83,17 +83,17 @@ int locateByValue(int elementValue, List* list) // для значения
     return -1; // в списке нет элемента с таким значением
 }
 
-int locate(ListElement* value, List* list) // для элемента
+int locate(ListElement* value, List* list) // для поиска совпадающего элемента
 {
     ListElement* current = list->head;
     int position = 0;
     while (current != NULL) {
-        if (current->value == value->value)
+        if (current == value)
             return position;
         current = current->next;
         ++position;
     }
-    return -1; // в списке нет элемента с таким значением
+    return -1; // в списке нет такого элемента
 }
 
 ListElement* retrieve(List* list, int position)

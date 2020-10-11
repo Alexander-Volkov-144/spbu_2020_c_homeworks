@@ -50,7 +50,12 @@ int main()
     printf("\n");
 
     printf("position of element with value 4: %d\n", locateByValue(4, numbers));
-    printf("position of element with value 1: %d\n", locate(number1, numbers));
+    printf("%d\n", locate(number1, numbers));
+    printf("\n");
+
+    ListElement* testElement = createListElement(1);
+    printf("%d\n", locate(testElement, numbers)); // элемент с таким же значением, но его нет в списке
+    insert(testElement, 0, numbers);
     printf("\n");
 
     delete (numbers, 2); // удаляется элемент на позиции 2
