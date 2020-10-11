@@ -16,7 +16,7 @@ double calculateNumber(char* string, int i)
 double getFirstElementValue(Stack* stack)
 {
     StackElement* temporaryElement = pop(stack);
-    double x = temporaryElement->storeElement;
+    double x = returnStoreElement(temporaryElement);
     deleteStackElement(temporaryElement);
     return x;
 }

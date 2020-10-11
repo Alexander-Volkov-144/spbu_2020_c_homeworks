@@ -1,6 +1,11 @@
 #include "stackd.h"
 #include <stdlib.h>
 
+struct StackElement {
+    double storeElement;
+    struct StackElement* next;
+};
+
 struct Stack {
     struct StackElement* top;
     int stackSize;
@@ -61,4 +66,9 @@ void removeStack(Stack* stack)
 int getSize(Stack* stack)
 {
     return stack->stackSize;
+}
+
+double returnStoreElement(StackElement* element)
+{
+    return element->storeElement;
 }

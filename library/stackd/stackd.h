@@ -3,13 +3,9 @@
 #ifndef SPBU_2020_C_HOMEWORKS_STACK_H
 #define SPBU_2020_C_HOMEWORKS_STACK_H
 
-typedef struct StackElement {
-    double storeElement;
-    struct StackElement* next;
-}StackElement;
+typedef struct StackElement StackElement;
 
 typedef struct Stack Stack;
-
 
 StackElement* createStackElement(double storeElement);
 
@@ -26,5 +22,7 @@ void deleteStackElement(StackElement* stackElement);
 void removeStack(Stack* stack);
 
 int getSize(Stack* stack);
+
+double returnStoreElement(StackElement* element);
 
 #endif //SPBU_2020_C_HOMEWORKS_STACK_H
