@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListElement{
+struct ListElement {
     int value;
     struct ListElement* next;
 };
 
-struct List{
+struct List {
     ListElement* head;
     int size;
 };
@@ -95,7 +95,6 @@ int locate(ListElement* value, List* list){
     return -1; // в списке нет элемента с таким значением
 }
 
-
 ListElement* retrieve(List* list, int position)
 {
     if (position >= listSize(list) || position < 0)
@@ -153,7 +152,7 @@ bool deleteList(List* list)
 
 int returnElementValue(ListElement* element)
 {
-    if (element == NULL){
+    if (element == NULL) {
         printf("error, item doesnt exist\n");
         return 0;
     }
