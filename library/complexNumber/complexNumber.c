@@ -58,7 +58,7 @@ void printComplexNumber(complexNumber* x)
         if (x->imaginaryPart == 0) {
             printf("%lf\n", x->realPart);
         } else {
-            printf("%lf + %lfi\n", x->realPart, x->imaginaryPart);
+            printf("%lf + (%lf)i\n", x->realPart, x->imaginaryPart);
         }
     }
 }
