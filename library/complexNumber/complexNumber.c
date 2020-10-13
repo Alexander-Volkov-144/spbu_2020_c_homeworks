@@ -29,8 +29,7 @@ complexNumber* subtractComplexNumber(complexNumber* x, complexNumber* y)
 
 complexNumber* multiplyComplexNumbers(complexNumber* x, complexNumber* y)
 {
-    complexNumber* newNumber = createComplexNumber(x->realPart * y->realPart - x->imaginaryPart * y->imaginaryPart,
-                                                   x->realPart * y->imaginaryPart + y->realPart * x->imaginaryPart);
+    complexNumber* newNumber = createComplexNumber(x->realPart * y->realPart - x->imaginaryPart * y->imaginaryPart, x->realPart * y->imaginaryPart + y->realPart * x->imaginaryPart);
     return newNumber;
 }
 
