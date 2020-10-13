@@ -3,7 +3,7 @@
 
 int* mergeArrays(int* array1, int size1, int* array2, int size2)
 {
-    int* newArray = (int*) malloc((size1 + size2) * sizeof(int));
+    int* newArray = (int*)malloc((size1 + size2) * sizeof(int));
     int i = 0, j = 0; // для исходных массивов
     int z = 0; // для нового массива
     while (i < size1 && j < size2) {
@@ -22,7 +22,7 @@ int* mergeArrays(int* array1, int size1, int* array2, int size2)
         ++z;
         ++i;
     }
-    while (j < size2){
+    while (j < size2) {
         newArray[z] = array2[j];
         ++z;
         ++j;
@@ -32,7 +32,7 @@ int* mergeArrays(int* array1, int size1, int* array2, int size2)
 
 int* createArray(int size)
 {
-    int* temporaryArray = (int*) malloc(size * sizeof(int));
+    int* temporaryArray = (int*)malloc(size * sizeof(int));
     printf("enter the elements\n");
     for (int i = 0; i < size; ++i) {
         scanf("%d", &(temporaryArray[i]));
