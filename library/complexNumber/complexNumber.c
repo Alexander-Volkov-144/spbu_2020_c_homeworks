@@ -39,8 +39,7 @@ complexNumber* divideComplexNumbers(complexNumber* x, complexNumber* y)
         printf("error, division by zero\n");
         return NULL;
     }
-    complexNumber* newNumber = createComplexNumber((x->realPart * y->realPart + x->imaginaryPart * y->imaginaryPart) / (y->realPart * y->realPart + y->imaginaryPart * y->imaginaryPart),
-                                                   (y->realPart * x->imaginaryPart - x->realPart * y->imaginaryPart) / (y->realPart * y->realPart + y->imaginaryPart * y->imaginaryPart));
+    complexNumber* newNumber = createComplexNumber((x->realPart * y->realPart + x->imaginaryPart * y->imaginaryPart) / (y->realPart * y->realPart + y->imaginaryPart * y->imaginaryPart), (y->realPart * x->imaginaryPart - x->realPart * y->imaginaryPart) / (y->realPart * y->realPart + y->imaginaryPart * y->imaginaryPart));
     return newNumber;
 }
 
