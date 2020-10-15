@@ -43,7 +43,6 @@ bool* createBinaryRepresentation(int number)
     return binaryRepresentation;
 }
 
-
 int main()
 {
     int number1 = 0;
