@@ -7,17 +7,24 @@
 char* readString()
 {
     char* newString = (char*)malloc(sizeof(char));
-    int i = 0, size = 1;
+    int i = 0;
+    size_t size = 1;
     char currentCharacter = getchar();
     while (currentCharacter != '\n') {
         if (i == size) {
-            newString = (char*)realloc(newString, size * 2);
             size *= 2;
+            newString = (char*)realloc(newString, size);
         }
         newString[i] = currentCharacter;
         ++i;
         currentCharacter = getchar();
     }
+    currentCharacter = '\0';
+    if (i == size) {
+        size *= 2;
+        newString = (char*)realloc(newString, size);
+    }
+    newString[i] = currentCharacter;
     return newString;
 }
 
@@ -49,14 +56,14 @@ double calculatePartialResult(Stack* numbers, char operation)
     double b = getFirstElementValue(numbers);
     double a = getFirstElementValue(numbers);
     switch (operation) {
-    case '+':
-        return a + b;
-    case '-':
-        return a - b;
-    case '*':
-        return a * b;
-    case '/':
-        return a / b;
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            return a / b;
     }
     printf("error in function calculatePartialResult\n");
     return 0;
@@ -71,9 +78,10 @@ double calculateResult(char* expression)
             while (isdigit(expression[i])) {
                 ++i;
             }
-        } else if (isOperation(expression[i])) {
-            push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
-        }
+        } else
+            if (isOperation(expression[i])) {
+                push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
+            }
     }
     double result = getFirstElementValue(numbers);
     removeStack(numbers);
@@ -85,5 +93,6 @@ int main()
     printf("enter expression in postfix form\n");
     char* expression = readString();
     printf("= %f", calculateResult(expression));
+    free(expression);
     return 0;
 }
