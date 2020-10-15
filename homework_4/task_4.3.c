@@ -1,69 +1,65 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-#define INT_SIZE 32
-
-bool* sumBinary(const bool* binaryRepresentation1, const bool* binaryRepresentation2)
+bool sumBinary(const bool* binaryRepresentation1, const bool* binaryRepresentation2, bool* sumInBinary, int size)
 {
-    bool* newBinaryRepresentation = (bool*)malloc(INT_SIZE * sizeof(bool));
     int previousRemainder = 0;
-    for (int i = 0; i < INT_SIZE; ++i) {
-        newBinaryRepresentation[i] = (previousRemainder + binaryRepresentation1[i] + binaryRepresentation2[i]) % 2;
+    for (int i = 0; i < size; ++i) {
+        sumInBinary[i] = (previousRemainder + binaryRepresentation1[i] + binaryRepresentation2[i]) % 2;
         previousRemainder = (previousRemainder + binaryRepresentation1[i] + binaryRepresentation2[i]) / 2;
     }
-    return newBinaryRepresentation;
+    return true;
 }
 
-int getDecimal(const bool* binaryRepresentation)
+int getDecimal(const bool* binaryRepresentation, int size)
 {
     int decimalNumber = 0;
-    int twoInPower = 1;
-    for (int i = 0; i < INT_SIZE; ++i) {
-        decimalNumber += (binaryRepresentation[i] ? twoInPower : 0);
-        twoInPower *= 2;
+    int powerOfTwo = 1;
+    for (int i = 0; i < size; ++i) {
+        decimalNumber += (binaryRepresentation[i] ? powerOfTwo : 0);
+        powerOfTwo *= 2;
     }
     return decimalNumber;
 }
 
-void printBinaryRepresentation(const bool* binaryRepresentation)
+void printBinaryRepresentation(const bool* binaryRepresentation, int size)
 {
-    for (int i = 0; i < INT_SIZE; ++i) {
+    for (int i = 0; i < size; ++i) {
         printf("%d", (binaryRepresentation[i] ? 1 : 0));
     }
 }
 
-bool* createBinaryRepresentation(int number)
+bool createBinaryRepresentation(bool* binaryRepresentation, int size, int number)
 {
-    bool* binaryRepresentation = (bool*)malloc(INT_SIZE * sizeof(bool));
-    for (int i = 0; i < INT_SIZE; ++i) {
+    for (int i = 0; i < size; ++i) {
         binaryRepresentation[i] = (number & 1) == 1;
         number >>= 1;
     }
-    return binaryRepresentation;
+    return true;
 }
 
 int main()
 {
     int number1 = 0;
+    int size = sizeof(int) * sizeof(bool) * 8;
     printf("enter the first number\n");
     scanf("%d", &number1);
-    bool* binaryRepresentation1 = createBinaryRepresentation(number1);
+    bool binaryRepresentation1[size];
+    createBinaryRepresentation(binaryRepresentation1, size, number1);
     int number2 = 0;
     printf("enter the second number\n");
     scanf("%d", &number2);
-    bool* binaryRepresentation2 = createBinaryRepresentation(number2);
+    bool binaryRepresentation2[size];
+    createBinaryRepresentation(binaryRepresentation2, size, number2);
     printf("%d = ", number1);
-    printBinaryRepresentation(binaryRepresentation1);
+    printBinaryRepresentation(binaryRepresentation1, size);
     printf("\n");
     printf("%d = ", number2);
-    printBinaryRepresentation(binaryRepresentation2);
+    printBinaryRepresentation(binaryRepresentation2, size);
     printf("\n");
-    bool* sumInBinary = sumBinary(binaryRepresentation1, binaryRepresentation2);
-    int sum = getDecimal(sumInBinary);
+    bool sumInBinary[size];
+    sumBinary(binaryRepresentation1, binaryRepresentation2, sumInBinary, size);
+    int sum = getDecimal(sumInBinary, size);
     printf("%d + %d = %d (calculated in binary notation)\n", number1, number2, sum);
     printf("%d + %d = %d (calculated in decimal notation)", number1, number2, number1 + number2);
-    free(binaryRepresentation1);
-    free(binaryRepresentation2);
-    free(sumInBinary);
 }
