@@ -56,14 +56,14 @@ double calculatePartialResult(Stack* numbers, char operation)
     double b = getFirstElementValue(numbers);
     double a = getFirstElementValue(numbers);
     switch (operation) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '/':
-            return a / b;
+    case '+':
+        return a + b;
+    case '-':
+        return a - b;
+    case '*':
+        return a * b;
+    case '/':
+        return a / b;
     }
     printf("error in function calculatePartialResult\n");
     return 0;
@@ -78,10 +78,9 @@ double calculateResult(char* expression)
             while (isdigit(expression[i])) {
                 ++i;
             }
-        } else
-            if (isOperation(expression[i])) {
-                push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
-            }
+        } else if (isOperation(expression[i])) {
+            push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
+        }
     }
     double result = getFirstElementValue(numbers);
     removeStack(numbers);
