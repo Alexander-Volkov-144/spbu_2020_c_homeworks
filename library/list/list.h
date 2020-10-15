@@ -33,4 +33,10 @@ int listSize(List* list);
 
 int returnElementValue(ListElement* element);
 
+bool isNextElementExist(ListElement* element);
+
+ListElement* nextElement(ListElement* element);
+
+void changeElementValue(ListElement* element, int newValue);
+
 #endif //SPBU_2020_C_HOMEWORKS_LIST_H

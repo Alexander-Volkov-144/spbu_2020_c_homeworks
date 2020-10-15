@@ -164,3 +164,18 @@ int listSize(List* list)
 {
     return list->size;
 }
+
+bool isNextElementExist(ListElement* element)
+{
+    return !(element->next == NULL);
+}
+
+ListElement* nextElement(ListElement* element)
+{
+    return element->next;
+}
+
+void changeElementValue(ListElement* element, int newValue)
+{
+    element->value = newValue;
+}
