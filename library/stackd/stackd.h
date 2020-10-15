@@ -23,6 +23,6 @@ void removeStack(Stack* stack);
 
 int getSize(Stack* stack);
 
-double returnStoreElement(StackElement* element);
+double getStoreElement(StackElement* element);
 
 #endif //SPBU_2020_C_HOMEWORKS_STACK_H

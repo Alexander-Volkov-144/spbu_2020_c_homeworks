@@ -68,7 +68,7 @@ int getSize(Stack* stack)
     return stack->stackSize;
 }
 
-double returnStoreElement(StackElement* element)
+double getStoreElement(StackElement* element)
 {
     return element->storeElement;
 }

@@ -1,12 +1,35 @@
 #include "../library/stackd/stackd.h"
+#include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX_LENGTH 2048
+char* readString()
+{
+    char* newString = (char*)malloc(sizeof(char));
+    int i = 0, size = 1;
+    char currentCharacter = getchar();
+    while (currentCharacter != '\n') {
+        if (i == size) {
+            newString = (char*)realloc(newString, size * 2);
+            size *= 2;
+        }
+        newString[i] = currentCharacter;
+        ++i;
+        currentCharacter = getchar();
+    }
+    return newString;
+}
 
-double calculateNumber(char* string, int i)
+bool isOperation(char x)
+{
+    return '*' <= x && x <= '/';
+}
+
+double parseNumber(const char* string, int i)
 {
     double value = 0;
-    for (; string[i] != ' '; ++i) {
+    for (; isdigit(string[i]); ++i) {
         value *= 10;
         value += (string[i] - '0');
     }
@@ -16,7 +39,7 @@ double calculateNumber(char* string, int i)
 double getFirstElementValue(Stack* stack)
 {
     StackElement* temporaryElement = pop(stack);
-    double x = returnStoreElement(temporaryElement);
+    double x = getStoreElement(temporaryElement);
     deleteStackElement(temporaryElement);
     return x;
 }
@@ -35,18 +58,21 @@ double calculatePartialResult(Stack* numbers, char operation)
     case '/':
         return a / b;
     }
-};
+    printf("error in function calculatePartialResult\n");
+    return 0;
+}
 
 double calculateResult(char* expression)
 {
     Stack* numbers = createStack();
     for (int i = 0; expression[i] != '\0'; ++i) {
-        if ('1' <= expression[i] && expression[i] <= '9') {
-            push(numbers, createStackElement(calculateNumber(expression, i)));
-        } else {
-            if ('*' <= expression[i] && expression[i] <= '/') {
-                push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
+        if (isdigit(expression[i])) {
+            push(numbers, createStackElement(parseNumber(expression, i)));
+            while (isdigit(expression[i])) {
+                ++i;
             }
+        } else if (isOperation(expression[i])) {
+            push(numbers, createStackElement(calculatePartialResult(numbers, expression[i])));
         }
     }
     double result = getFirstElementValue(numbers);
@@ -56,9 +82,8 @@ double calculateResult(char* expression)
 
 int main()
 {
-    char expression[MAX_LENGTH];
     printf("enter expression in postfix form\n");
-    fgets(expression, MAX_LENGTH, stdin);
-    printf("%f", calculateResult(expression));
+    char* expression = readString();
+    printf("= %f", calculateResult(expression));
     return 0;
 }
