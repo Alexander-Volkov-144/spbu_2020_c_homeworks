@@ -6,7 +6,7 @@
 
 bool convertToBytes(double number, unsigned char* numberInBytes)
 {
-    unsigned char* reversedNumberInBytes = (unsigned char*) &number;
+    unsigned char* reversedNumberInBytes = (unsigned char*)&number;
     for (int i = 0; i < SD; ++i) {
         numberInBytes[i] = reversedNumberInBytes[SD - (1 + i)];
     }
@@ -20,9 +20,9 @@ char getSignOfNumber(unsigned char* numberInBytes)
 
 int getExponentOfNumber(unsigned char* numberInBytes)
 {
-    int exponentOfNumber = (int) (numberInBytes[0] & 0b01111111);
+    int exponentOfNumber = (int)(numberInBytes[0] & 0b01111111);
     exponentOfNumber <<= 4;
-    exponentOfNumber += (int) (numberInBytes[1] >> 4);
+    exponentOfNumber += (int)(numberInBytes[1] >> 4);
     exponentOfNumber -= 1023;
     return exponentOfNumber;
 }
@@ -38,7 +38,7 @@ double getSignificandOfNumber(unsigned char* numberInBytes)
     fractionalPart >>= 8;
     unsigned long long div = 1;
     div <<= 52;
-    return ((double) fractionalPart) / div + 1;
+    return ((double)fractionalPart) / div + 1;
 }
 
 bool printInExponentialForm(char signOfNumber, int exponentOfNumber, double significandOfNumber)
