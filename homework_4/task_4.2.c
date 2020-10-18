@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SD sizeof(double)
+const int sizeOfDouble = sizeof(double);
 
 bool convertToBytes(double number, unsigned char* numberInBytes)
 {
     unsigned char* reversedNumberInBytes = (unsigned char*)&number;
-    for (int i = 0; i < SD; ++i) {
-        numberInBytes[i] = reversedNumberInBytes[SD - (1 + i)];
+    for (int i = 0; i < sizeOfDouble; ++i) {
+        numberInBytes[i] = reversedNumberInBytes[sizeOfDouble - (1 + i)];
     }
     return true;
 }
@@ -31,7 +31,7 @@ double getSignificandOfNumber(unsigned char* numberInBytes)
 {
     unsigned long long fractionalPart = (numberInBytes[1] & 0b00001111);
     fractionalPart <<= 8;
-    for (int i = 2; i < SD; i++) {
+    for (int i = 2; i < sizeOfDouble; i++) {
         fractionalPart += (numberInBytes[i] & 0b11111111);
         fractionalPart <<= 8;
     }
@@ -56,8 +56,8 @@ int main()
     double number = 0;
     printf("enter the number:");
     scanf("%lf", &number);
-    unsigned char numberInBytes[(SD * sizeof(unsigned char))];
-    memset(numberInBytes, 0, (SD * sizeof(unsigned char)));
+    unsigned char numberInBytes[(sizeOfDouble * sizeof(unsigned char))];
+    memset(numberInBytes, 0, (sizeOfDouble * sizeof(unsigned char)));
     convertToBytes(number, numberInBytes);
     char signOfNumber = getSignOfNumber(numberInBytes);
     int exponentOfNumber = getExponentOfNumber(numberInBytes);
