@@ -7,6 +7,7 @@ set(SOURCE_LIB library/commonUtils/numericOperations.c)
 
 add_library(stackd STATIC library/stackd/stackd.c)
 add_library(list STATIC library/list/list.c)
+add_library(bst STATIC library/bst/bst.c)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.h library/commonUtils/reverseArray.c)
@@ -27,3 +28,6 @@ add_executable(task_3.2 homework_3/task_3.2.c)
 target_link_libraries(task_3.2 list)
 add_executable(task_4.2 homework_4/task_4.2.c)
 add_executable(task_4.3 homework_4/task_4.3.c)
+add_executable(task_5.1 homework_5/task_5.1.c)
+
+target_link_libraries(task_5.1 bst)
