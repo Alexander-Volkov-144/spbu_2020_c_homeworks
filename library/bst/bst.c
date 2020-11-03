@@ -152,8 +152,7 @@ BinaryTreeNode* findMinimum(BinaryTreeNode* node, BinaryTreeNode** parent)
     return currentTreeNode;
 }
 
-bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, int value, BinaryTreeNode* parent,
-                     enum Direction direction)
+bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, int value, BinaryTreeNode* parent, enum Direction direction)
 {
     if (node->value == value) {
         if (isLeaf(node)) {
