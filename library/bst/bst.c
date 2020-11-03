@@ -27,16 +27,16 @@ BinarySearchTree* createTree()
 
 void removeNodeRecursive(BinaryTreeNode* node)
 {
-    if (node->leftChild == NULL && NULL == node->rightChild) {
+    if (NULL == node->leftChild && NULL == node->rightChild) {
         free(node);
         return;
     }
-    if (node->leftChild != NULL && NULL == node->rightChild) {
+    if (NULL != node->leftChild && NULL == node->rightChild) {
         removeNodeRecursive(node->leftChild);
         free(node);
         return;
     }
-    if (node->leftChild == NULL && NULL != node->rightChild) {
+    if (NULL == node->leftChild && NULL != node->rightChild) {
         removeNodeRecursive(node->rightChild);
         free(node);
         return;
@@ -68,7 +68,7 @@ bool existsRecursive(BinaryTreeNode* node, int value)
 
 bool isEmpty(BinarySearchTree* tree)
 {
-    return (tree->root == NULL);
+    return (NULL == tree->root);
 }
 
 bool exists(BinarySearchTree* tree, int value)
@@ -201,7 +201,7 @@ bool removeValue(BinarySearchTree* tree, int value)
 
 void printNodeRecursive(BinaryTreeNode* node)
 {
-    if (node == NULL) {
+    if (NULL == node) {
         printf("null ");
     } else {
         printf("(%d ", node->value);
