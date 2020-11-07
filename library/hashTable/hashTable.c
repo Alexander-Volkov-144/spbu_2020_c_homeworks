@@ -73,7 +73,7 @@ int getHash(char* key, int polynomFactor, int module)
 void destroyHashTable(HashTable* table)
 {
     for (int i = 0; i < table->bucketCount; ++i) {
-        if(used == table->types[i])
+        if (used == table->types[i])
             free(table->hashTable[i]->key);
         free(table->hashTable[i]);
     }
