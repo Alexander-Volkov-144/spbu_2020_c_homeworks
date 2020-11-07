@@ -174,9 +174,15 @@ bool removeRecursive(BinarySearchTree* tree, BinaryTreeNode* node, int value, Bi
         BinaryTreeNode* nodeWithMinimumValue = findMinimum(node->rightChild, &temporaryParent);
         node->value = nodeWithMinimumValue->value;
         if (nodeWithMinimumValue == node->rightChild) {
-            changeParent(tree, NULL, node, right);
+            if (NULL != nodeWithMinimumValue->rightChild)
+                changeParent(tree, nodeWithMinimumValue->rightChild, node, right);
+            else
+                changeParent(tree, NULL, node, right);
         } else {
-            changeParent(tree, NULL, temporaryParent, left);
+            if (NULL != nodeWithMinimumValue->rightChild)
+                changeParent(tree, nodeWithMinimumValue->rightChild, temporaryParent, left);
+            else
+                changeParent(tree, NULL, temporaryParent, left);
         }
         free(nodeWithMinimumValue);
         return true;
