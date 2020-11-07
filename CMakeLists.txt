@@ -7,6 +7,7 @@ set(SOURCE_LIB library/commonUtils/numericOperations.c)
 
 add_library(stackd STATIC library/stackd/stackd.c)
 add_library(list STATIC library/list/list.c)
+add_library(hashTable STATIC library/hashTable/hashTable.c)
 
 add_library(complexNumber library/complexNumber/complexNumber.c)
 
@@ -34,3 +35,6 @@ add_executable(task_4.3 homework_4/task_4.3.c)
 add_executable(test_1.1 test_1/test_1.1.c)
 add_executable(test_1.2 test_1/test_1.2.c)
 target_link_libraries(test_1.2 complexNumber)
+
+add_executable(task_6.1 homework_6/task_6.1.c)
+target_link_libraries(task_6.1 hashTable)
