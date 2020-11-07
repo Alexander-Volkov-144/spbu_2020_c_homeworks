@@ -130,8 +130,7 @@ bool addElementWithProbes(HashTable* table, char* key, int value, int numberOfPr
             }
             return true;
         }
-        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) %
-                       table->bucketCount;
+        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) % table->bucketCount;
         ++currentNumberOfProbes;
         if (currentIndex == startIndex)
             return false;
@@ -234,4 +233,3 @@ void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
     }
     free(alreadyCounted);
 }
-
