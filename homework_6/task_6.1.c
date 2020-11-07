@@ -7,46 +7,18 @@
 
 const int MAX_WORD_LENGTH = 20;
 
-double getAverageNumberOfProbes(HashTable* hashTable)
-{
-    return 0;
-}
-
-int getMaximumNumberOfProbes(HashTable* hashTable)
-{
-    return 0;
-}
-
-void printElementsWithMaximumNumberOfProbes(HashTable* hashTable, int maximumNumberOfProbes)
-{
-
-}
-
-int getNumberOfAddedElements(HashTable* hashTable)
-{
-    return 0;
-}
-
-int getNumberOfEmptyBuckets(HashTable* hashTable)
-{
-    return 0;
-}
-
-void printTheMostCommonElements(HashTable* hashTable)
-{
-
-}
-
 void printTheNecessaryInformation(HashTable* words)
 {
     printf("load factor: %f\n", getLoadFactor(words));
     printf("average number of probes: %f\n", getAverageNumberOfProbes(words));
     int maximumNumberOfProbes = getMaximumNumberOfProbes(words);
     printf("maximum number of probes: %d\n", maximumNumberOfProbes);
-    printElementsWithMaximumNumberOfProbes(words, maximumNumberOfProbes);
-    printf("number of words added: %d\n", getNumberOfAddedElements(words));
-    printf("number of empty buckets: %d\n", getNumberOfEmptyBuckets(words));
-    printTheMostCommonElements(words);
+    printf("elements with maximum number of probes: ");
+    printAllElementsWithCertainNumberOfProbes(words, maximumNumberOfProbes);
+    printf("\n");
+    printf("number of words added: %d\n", getElementCount(words));
+    printf("number of empty buckets: %d\n", getBucketCount(words) - getElementCount(words));
+    printElementsWithBiggestValues(words, 10);
 }
 
 bool isLetter(char character)
@@ -72,15 +44,17 @@ bool readWordFromFile(FILE* file, char* word)
 int main()
 {
     FILE* input = NULL;
-    input = fopen("D:\\input.txt", "r");
+    input = fopen("input.txt", "r");
     char* currentWord = (char*)malloc(sizeof(char) * MAX_WORD_LENGTH);
     memset(currentWord, 0, sizeof(char) * MAX_WORD_LENGTH);
     HashTable* words = createHashTable(2);
 
     while (readWordFromFile(input, currentWord)) {
-        addElement(words, currentWord, 1);
+        if (currentWord[0] != '\0')
+            addElement(words, currentWord, 1);
     }
-    addElement(words, currentWord, 1);
+    if (currentWord[0] != '\0')
+        addElement(words, currentWord, 1);
 
     printTheNecessaryInformation(words);
 
