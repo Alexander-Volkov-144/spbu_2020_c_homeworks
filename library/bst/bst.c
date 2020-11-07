@@ -48,7 +48,8 @@ void removeNodeRecursive(BinaryTreeNode* node)
 
 void removeTree(BinarySearchTree* tree)
 {
-    removeNodeRecursive(tree->root);
+    if (NULL != tree->root)
+        removeNodeRecursive(tree->root);
     free(tree);
 }
 
