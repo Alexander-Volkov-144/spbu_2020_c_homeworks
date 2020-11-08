@@ -35,7 +35,7 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
 {
     HashElement* newElement = (HashElement*)malloc(sizeof(HashElement));
     int keySize = (int)strlen(key);
-    newElement->key = (char*)malloc(sizeof(char) * keySize);
+    newElement->key = (char*)malloc(sizeof(char) * (keySize + 1));
     strcpy(newElement->key, key);
     newElement->value = value;
     newElement->numberOfProbes = numberOfProbes;
@@ -73,6 +73,8 @@ int getHash(char* key, int polynomFactor, int module)
 void destroyHashTable(HashTable* table)
 {
     for (int i = 0; i < table->bucketCount; ++i) {
+        if(used == table->types[i])
+            free(table->hashTable[i]->key);
         free(table->hashTable[i]);
     }
     free(table->hashTable);
@@ -99,6 +101,8 @@ void expandTable(HashTable* table)
         if (oldTypes[i] == used) {
             HashElement* element = oldElements[i];
             addElementWithProbes(table, element->key, element->value, element->numberOfProbes);
+            free(element->key);
+            free(element);
         }
     }
     free(oldElements);
@@ -187,7 +191,7 @@ int getBucketCount(HashTable* table)
     return table->bucketCount;
 }
 
-bool notInArray(int* array, int size, int value)
+bool notInArray(const int* array, int size, int value)
 {
     for (int i = 0; i < size; ++i) {
         if (array[i] == value)
