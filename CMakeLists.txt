@@ -8,6 +8,7 @@ set(SOURCE_LIB library/commonUtils/numericOperations.c)
 add_library(stackd STATIC library/stackd/stackd.c)
 add_library(list STATIC library/list/list.c)
 add_library(bst STATIC library/bst/bst.c)
+add_library(avl STATIC library/avl/avl.c)
 
 add_library(complexNumber library/complexNumber/complexNumber.c)
 
@@ -33,8 +34,9 @@ add_executable(task_4.2 homework_4/task_4.2.c)
 add_executable(task_4.3 homework_4/task_4.3.c)
 
 add_executable(task_5.1 homework_5/task_5.1.c)
-
+add_executable(task_5.2 homework_5/task_5.2.c)
 target_link_libraries(task_5.1 bst)
+target_link_libraries(task_5.2 avl)
 
 add_executable(test_1.1 test_1/test_1.1.c)
 add_executable(test_1.2 test_1/test_1.2.c)
