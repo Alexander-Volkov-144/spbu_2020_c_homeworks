@@ -55,7 +55,7 @@ void removeTree(BinarySearchTree* tree)
 
 bool existsRecursive(BinaryTreeNode* node, int value)
 {
-    if (node->value == value) {
+    if (value == node->value) {
         return true;
     }
     if (value < node->value && NULL != node->leftChild) {
@@ -69,7 +69,7 @@ bool existsRecursive(BinaryTreeNode* node, int value)
 
 bool isEmpty(BinarySearchTree* tree)
 {
-    return (NULL == tree->root);
+    return (tree->root == NULL);
 }
 
 bool exists(BinarySearchTree* tree, int value)
