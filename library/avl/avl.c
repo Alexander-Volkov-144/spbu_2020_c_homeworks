@@ -82,7 +82,6 @@ AVLNode* balance(AVLNode* node)
     }
 }
 
-
 AVLTree* createTree()
 {
     AVLTree* newTree = (AVLTree*)malloc(sizeof(AVLTree));
