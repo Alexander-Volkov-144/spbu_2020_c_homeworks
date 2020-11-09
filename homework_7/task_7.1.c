@@ -35,7 +35,6 @@ int* findOriginal(Graph* copiedWorks, int numberOfStudents)
     return worksSources;
 }
 
-
 int main()
 {
     printf("enter the number of students (not including the first three)\n");
