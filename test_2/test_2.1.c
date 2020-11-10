@@ -19,4 +19,3 @@ int main()
     printf("%d Fibonacci ordinalNumber: %llu", ordinalNumber, getFibonacciNumber(ordinalNumber));
     return 0;
 }
-
