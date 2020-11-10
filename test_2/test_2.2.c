@@ -56,7 +56,7 @@ bool compareDates(char* firstString, char* secondString)
             if (firstMonth < secondMonth) {
                 return true;
             } else {
-                if (firstMonth < secondMonth) {
+                if (firstMonth > secondMonth) {
                     return false;
                 } else {
                     return getNumericalEquivalent(firstString, 2) < getNumericalEquivalent(secondString, 2);
