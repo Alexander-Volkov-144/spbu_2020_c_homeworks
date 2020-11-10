@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 
 bool isNumeral(char character)
@@ -16,7 +16,6 @@ int getNumericalEquivalent(const char* string, int size)
     }
     return result;
 }
-
 
 bool isDate(char* string)
 {
