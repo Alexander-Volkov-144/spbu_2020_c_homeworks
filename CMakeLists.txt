@@ -39,3 +39,5 @@ target_link_libraries(task_5.1 bst)
 add_executable(test_1.1 test_1/test_1.1.c)
 add_executable(test_1.2 test_1/test_1.2.c)
 target_link_libraries(test_1.2 complexNumber)
+
+add_executable(test_2.1 test_2/test_2.1.c)
