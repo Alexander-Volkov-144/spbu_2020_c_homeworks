@@ -7,7 +7,9 @@ typedef struct HashTable HashTable;
 
 bool addElement(HashTable* table, char* key, int value);
 
-HashTable* createHashTable(int polynomFactor);
+bool removeElement(HashTable* table, char* key);
+
+HashTable* createHashTable();
 
 void destroyHashTable(HashTable* table);
 

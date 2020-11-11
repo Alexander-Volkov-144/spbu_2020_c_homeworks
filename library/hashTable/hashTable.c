@@ -23,7 +23,6 @@ struct HashTable {
     enum CellType* types;
     int bucketCount;
     int elementCount;
-    int polynomFactor;
 };
 
 bool addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes);
@@ -44,7 +43,7 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
     return newElement;
 }
 
-HashTable* createHashTableWithSize(int polynomFactor, int size)
+HashTable* createHashTableWithSize(int size)
 {
     HashTable* newTable = (HashTable*)malloc(sizeof(HashTable));
     newTable->hashTable = (HashElement**)malloc(sizeof(HashElement*) * size);
@@ -53,21 +52,20 @@ HashTable* createHashTableWithSize(int polynomFactor, int size)
     newTable->bucketCount = size;
     memset(newTable->hashTable, 0, size * sizeof(HashElement*));
     newTable->elementCount = 0;
-    newTable->polynomFactor = polynomFactor;
     return newTable;
 }
 
-HashTable* createHashTable(int polynomFactor)
+HashTable* createHashTable()
 {
-    return createHashTableWithSize(polynomFactor, 1);
+    return createHashTableWithSize(1);
 }
 
-int getHash(char* key, int polynomFactor, int module)
+int getHash(char* key, int module)
 {
     int size = (int)strlen(key);
     int currentHash = 0;
     for (int i = 0; i < size; ++i) {
-        currentHash = ((currentHash * polynomFactor) + (key[i] - 'a')) % module;
+        currentHash = ((currentHash * 2) + (key[i] - 'a')) % module;
     }
     return currentHash;
 }
@@ -75,7 +73,7 @@ int getHash(char* key, int polynomFactor, int module)
 void destroyHashTable(HashTable* table)
 {
     for (int i = 0; i < table->bucketCount; ++i) {
-        if (used == table->types[i])
+        if (table->types[i] == used)
             free(table->hashTable[i]->key);
         free(table->hashTable[i]);
     }
@@ -113,39 +111,60 @@ void expandTable(HashTable* table)
 
 bool addElement(HashTable* table, char* key, int value)
 {
-    addElementWithProbes(table, key, value, 1);
-    return true;
+    bool isAdded = addElementWithProbes(table, key, value, 1);
+    if (!isAdded) {
+        printf("error, key \"%s\" not added\n", key);
+    }
+    return isAdded;
 }
 
 bool addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes)
 {
-    int startIndex = getHash(key, table->polynomFactor, table->bucketCount);
+    int startIndex = getHash(key, table->bucketCount);
     int currentIndex = startIndex;
     int currentNumberOfProbes = 1;
     while (table->types[currentIndex] == used) {
-        if (0 == strcmp(key, table->hashTable[currentIndex]->key)) {
+        if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
             table->hashTable[currentIndex]->value += value;
             if (currentNumberOfProbes > table->hashTable[currentIndex]->numberOfProbes) {
                 table->hashTable[currentIndex]->numberOfProbes = currentNumberOfProbes;
             }
             return true;
         }
-        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) % table->bucketCount;
+        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) %
+                       table->bucketCount;
         ++currentNumberOfProbes;
-        if (currentIndex == startIndex)
-            return false;
     }
     HashElement* newElement = createHashElement(key, value, numberOfProbes);
     newElement->numberOfProbes = currentNumberOfProbes;
     table->hashTable[currentIndex] = newElement;
     table->types[currentIndex] = used;
     table->elementCount++;
-
     if (getLoadFactor(table) > maxLoadFactor)
         expandTable(table);
-
     return true;
 }
+
+bool removeElement(HashTable* table, char* key)
+{
+    int startIndex = getHash(key, table->bucketCount);
+    int currentIndex = startIndex;
+    int currentNumberOfProbes = 1;
+    while (table->types[currentIndex] == used) {
+        if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
+            table->types[currentIndex] = deleted;
+            free(table->hashTable[currentIndex]);
+            table->elementCount--;
+            return true;
+        }
+        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) %
+                       table->bucketCount;
+        ++currentNumberOfProbes;
+        if (currentIndex == startIndex)
+            return false;
+    }
+    return false;
+};
 
 double getAverageNumberOfProbes(HashTable* table)
 {
@@ -154,6 +173,8 @@ double getAverageNumberOfProbes(HashTable* table)
         if (used == table->types[i])
             totalNumberOfProbes += table->hashTable[i]->numberOfProbes;
     }
+    if (table->elementCount == 0)
+        return 0;
     return (double)totalNumberOfProbes / table->elementCount;
 }
 
@@ -161,9 +182,8 @@ int getMaximumNumberOfProbes(HashTable* table)
 {
     int maximumNumberOfProbes = 0;
     for (int i = 0; i < table->bucketCount; ++i) {
-        if (used == table->types[i])
-            if (table->hashTable[i]->numberOfProbes > maximumNumberOfProbes)
-                maximumNumberOfProbes = table->hashTable[i]->numberOfProbes;
+        if (table->types[i] == used && table->hashTable[i]->numberOfProbes > maximumNumberOfProbes)
+            maximumNumberOfProbes = table->hashTable[i]->numberOfProbes;
     }
     return maximumNumberOfProbes;
 }
@@ -171,15 +191,14 @@ int getMaximumNumberOfProbes(HashTable* table)
 void printAllElementsWithCertainNumberOfProbes(HashTable* table, int numberOfProbes)
 {
     for (int i = 0; i < table->bucketCount; ++i) {
-        if (used == table->types[i]) {
-            if (table->hashTable[i]->numberOfProbes == numberOfProbes) {
-                for (int j = 0; table->hashTable[i]->key[j] != '\0'; ++j) {
-                    printf("%c", table->hashTable[i]->key[j]);
-                }
-                printf(" ");
+        if (used == table->types[i] && table->hashTable[i]->numberOfProbes == numberOfProbes) {
+            for (int j = 0; table->hashTable[i]->key[j] != '\0'; ++j) {
+                printf("%c", table->hashTable[i]->key[j]);
             }
+            printf(" ");
         }
     }
+
 }
 
 int getElementCount(HashTable* table)
@@ -192,13 +211,19 @@ int getBucketCount(HashTable* table)
     return table->bucketCount;
 }
 
-bool notInArray(const int* array, int size, int value)
+bool inArray(const int* array, int size, int value)
 {
     for (int i = 0; i < size; ++i) {
         if (array[i] == value)
-            return false;
+            return true;
     }
-    return true;
+    return false;
+}
+
+bool isLarger(HashTable* table, int* alreadyCounted, int numberOfElements, int index, int maximumValue, bool notFound)
+{
+    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) &&
+           (table->hashTable[index]->value > maximumValue || notFound);
 }
 
 void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
@@ -215,15 +240,11 @@ void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
         maximumValue = 0;
         notFound = true;
         for (int j = 0; j < table->bucketCount; ++j) {
-            if (notInArray(alreadyCounted, numberOfElements, j)) {
-                if (used == table->types[j]) {
-                    if (table->hashTable[j]->value > maximumValue || notFound) {
-                        notFound = false;
-                        foundKey = table->hashTable[j]->key;
-                        maximumValue = table->hashTable[j]->value;
-                        alreadyCounted[i] = j;
-                    }
-                }
+            if (isLarger(table, alreadyCounted, numberOfElements, j, maximumValue, notFound)) {
+                notFound = false;
+                foundKey = table->hashTable[j]->key;
+                maximumValue = table->hashTable[j]->value;
+                alreadyCounted[i] = j;
             }
         }
         for (int j = 0; foundKey[j] != '\0'; ++j) {
