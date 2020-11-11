@@ -196,7 +196,6 @@ void printAllElementsWithCertainNumberOfProbes(HashTable* table, int numberOfPro
             printf(" ");
         }
     }
-
 }
 
 int getElementCount(HashTable* table)
