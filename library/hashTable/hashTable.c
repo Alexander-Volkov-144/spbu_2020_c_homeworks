@@ -131,8 +131,7 @@ bool addElementWithProbes(HashTable* table, char* key, int value, int numberOfPr
             }
             return true;
         }
-        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) %
-                       table->bucketCount;
+        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) % table->bucketCount;
         ++currentNumberOfProbes;
     }
     HashElement* newElement = createHashElement(key, value, numberOfProbes);
@@ -157,8 +156,7 @@ bool removeElement(HashTable* table, char* key)
             table->elementCount--;
             return true;
         }
-        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) %
-                       table->bucketCount;
+        currentIndex = (currentIndex + (currentNumberOfProbes + currentNumberOfProbes * currentNumberOfProbes) / 2) % table->bucketCount;
         ++currentNumberOfProbes;
         if (currentIndex == startIndex)
             return false;
@@ -222,8 +220,7 @@ bool inArray(const int* array, int size, int value)
 
 bool isLarger(HashTable* table, int* alreadyCounted, int numberOfElements, int index, int maximumValue, bool notFound)
 {
-    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) &&
-           (table->hashTable[index]->value > maximumValue || notFound);
+    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) && (table->hashTable[index]->value > maximumValue || notFound);
 }
 
 void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
