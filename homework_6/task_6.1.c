@@ -24,14 +24,15 @@ bool isLetter(char character)
     return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z';
 }
 
-char* doubleSize(char* oldString, int oldSize){
+char* doubleSize(char* oldString, int oldSize)
+{
     char* newString = (char*)malloc(oldSize * 2 * sizeof(char));
-    if(newString == NULL){
+    if (newString == NULL) {
         printf("error in allocating memory\n");
         return NULL;
     }
     memset(newString, 0, oldSize * 2 * sizeof(char));
-    for(int i = 0; i < oldSize; ++i) {
+    for (int i = 0; i < oldSize; ++i) {
         newString[i] = oldString[i];
     }
     free(oldString);
@@ -40,13 +41,13 @@ char* doubleSize(char* oldString, int oldSize){
 
 char* readWordFromFile(FILE* file)
 {
-    char currentCharacter = (char) fgetc(file);
+    char currentCharacter = (char)fgetc(file);
     int i = 0;
     bool isFound = false;
     int size = 1;
-    char* word = (char*) malloc(sizeof(char));
+    char* word = (char*)malloc(sizeof(char));
     while (!isLetter(currentCharacter) && !feof(file)) {
-        currentCharacter = (char) fgetc(file);
+        currentCharacter = (char)fgetc(file);
     }
     while (!feof(file) && isLetter(currentCharacter)) {
         isFound = true;
@@ -54,9 +55,9 @@ char* readWordFromFile(FILE* file)
             word = doubleSize(word, size);
             size *= 2;
         }
-        word[i] = (char) tolower(currentCharacter);
+        word[i] = (char)tolower(currentCharacter);
         ++i;
-        currentCharacter = (char) fgetc(file);
+        currentCharacter = (char)fgetc(file);
     }
     if (i == size) {
         word = doubleSize(word, size);
