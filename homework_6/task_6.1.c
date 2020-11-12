@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void printTheNecessaryInformation(HashTable* words)
 {
@@ -23,46 +24,69 @@ bool isLetter(char character)
     return 'a' <= character && character <= 'z' || 'A' <= character && character <= 'Z';
 }
 
-bool readWordFromFile(FILE* file, char* word, int* size)
+char* doubleSize(char* oldString, int oldSize){
+    char* newString = (char*)malloc(oldSize * 2 * sizeof(char));
+    if(newString == NULL){
+        printf("error in allocating memory\n");
+        return NULL;
+    }
+    memset(newString, 0, oldSize * 2 * sizeof(char));
+    for(int i = 0; i < oldSize; ++i) {
+        newString[i] = oldString[i];
+    }
+    free(oldString);
+    return newString;
+}
+
+char* readWordFromFile(FILE* file)
 {
-    char currentCharacter = (char)fgetc(file);
+    char currentCharacter = (char) fgetc(file);
     int i = 0;
-    bool notEndOfFile = (currentCharacter != EOF);
-    while (notEndOfFile && isLetter(currentCharacter)) {
-        if (i >= *size) {
-            realloc(word, *size * 2 * sizeof(char));
-            if (word == NULL) {
-                printf("error in memory allocation\n");
-                return false;
-            }
-            *size *= 2;
+    bool isFound = false;
+    int size = 1;
+    char* word = (char*) malloc(sizeof(char));
+    while (!isLetter(currentCharacter) && !feof(file)) {
+        currentCharacter = (char) fgetc(file);
+    }
+    while (!feof(file) && isLetter(currentCharacter)) {
+        isFound = true;
+        if (i == size) {
+            word = doubleSize(word, size);
+            size *= 2;
         }
-        word[i] = (char)tolower(currentCharacter);
+        word[i] = (char) tolower(currentCharacter);
         ++i;
-        currentCharacter = (char)fgetc(file);
-        notEndOfFile = (currentCharacter != EOF);
+        currentCharacter = (char) fgetc(file);
+    }
+    if (i == size) {
+        word = doubleSize(word, size);
+        size *= 2;
     }
     word[i] = '\0';
-    return notEndOfFile;
+    if (feof(file)) {
+        free(word);
+        return NULL;
+    }
+    return word;
 }
 
 int main()
 {
     FILE* input = NULL;
-    input = fopen("input.txt", "r");
+    input = fopen("/media/user/Data/input.txt", "r");
     if (input == NULL) {
         printf("file \"input.txt\"not found");
         return 0;
     }
-    char* currentWord = (char*)malloc(sizeof(char));
-    int size = 1;
     HashTable* words = createHashTable();
-    while (readWordFromFile(input, currentWord, &size)) {
-        if (currentWord[0] != '\0')
+    char* currentWord = readWordFromFile(input);
+    while (currentWord != NULL) {
+        {
             addElement(words, currentWord, 1);
+            free(currentWord);
+            currentWord = readWordFromFile(input);
+        }
     }
-    if (currentWord[0] != '\0')
-        addElement(words, currentWord, 1);
 
     printTheNecessaryInformation(words);
 
