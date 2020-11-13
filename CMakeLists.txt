@@ -9,8 +9,8 @@ add_library(stackd STATIC library/stackd/stackd.c)
 add_library(list STATIC library/list/list.c)
 add_library(hashTable STATIC library/hashTable/hashTable.c)
 add_library(bst STATIC library/bst/bst.c)
-
 add_library(complexNumber library/complexNumber/complexNumber.c)
+add_library(fileProcessing library/fileProcessing/fileProcessing.c)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
@@ -43,3 +43,4 @@ target_link_libraries(test_1.2 complexNumber)
 
 add_executable(task_6.1 homework_6/task_6.1.c)
 target_link_libraries(task_6.1 hashTable)
+target_link_libraries(task_6.1 fileProcessing)

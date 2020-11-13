@@ -5,7 +5,7 @@
 
 typedef struct HashTable HashTable;
 
-bool addElement(HashTable* table, char* key, int value);
+void addElement(HashTable* table, char* key, int value);
 
 bool removeElement(HashTable* table, char* key);
 
