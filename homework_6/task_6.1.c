@@ -36,7 +36,7 @@ int getHash(char* key, int module)
 int main()
 {
     FILE* input = NULL;
-    input = fopen("/media/user/Data/input.txt", "r");
+    input = fopen("input.txt", "r");
     if (input == NULL) {
         printf("file \"input.txt\"not found");
         return 0;
