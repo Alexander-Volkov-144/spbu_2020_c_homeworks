@@ -1,6 +1,4 @@
 #include "hashTable.h"
-#include "../hashFunctions/hashComputation.h"
-#include "../indexGeneration/indexGeneration.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>

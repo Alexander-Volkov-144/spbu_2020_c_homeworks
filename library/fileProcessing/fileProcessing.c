@@ -11,6 +11,7 @@ char* readWordFromFile(FILE* file)
     int i = 0;
     int size = 1;
     char* word = (char*)malloc(sizeof(char));
+    word[0] = 0;
     while (!isLetter(currentCharacter) && !feof(file)) {
         currentCharacter = (char)fgetc(file);
     }
@@ -26,8 +27,12 @@ char* readWordFromFile(FILE* file)
 
     word[i] = '\0';
     if (feof(file)) {
+        if(size > 1)
+            return word;
+        else{
         free(word);
         return NULL;
+        }
     }
     return word;
 }

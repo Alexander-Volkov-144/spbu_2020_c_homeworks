@@ -29,4 +29,8 @@ int getBucketCount(HashTable* table);
 
 void printElementsWithBiggestValues(HashTable* table, int numberOfElements);
 
+extern int getHash(char* key, int module);
+
+extern int getIndex(int hash, int module, int numberOfProbes);
+
 #endif //SPBU_2020_C_HOMEWORKS_HASHTABLE_H

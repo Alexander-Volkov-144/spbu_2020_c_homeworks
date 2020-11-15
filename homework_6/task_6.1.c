@@ -18,10 +18,25 @@ void printTheNecessaryInformation(HashTable* words)
     printElementsWithBiggestValues(words, 10);
 }
 
+int getIndex(int hash, int module, int numberOfProbes)
+{
+    return (hash + ((numberOfProbes - 1) * numberOfProbes) / 2) % module;
+}
+
+int getHash(char* key, int module)
+{
+    int size = (int)strlen(key);
+    int currentHash = 0;
+    for (int i = 0; i < size; ++i) {
+        currentHash = ((currentHash * 2) + (key[i] - 'a')) % module;
+    }
+    return currentHash;
+}
+
 int main()
 {
     FILE* input = NULL;
-    input = fopen("input.txt", "r");
+    input = fopen("/home/user/Документы/test files/test 1", "r");
     if (input == NULL) {
         printf("file \"input.txt\"not found");
         return 0;
