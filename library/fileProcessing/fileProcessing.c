@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 char* readWordFromFile(FILE* file)
 {
     char currentCharacter = (char)fgetc(file);

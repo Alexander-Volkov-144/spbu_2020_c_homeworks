@@ -1,7 +1,7 @@
 #include "stringManipulations.h"
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 bool isLetter(char character)
