@@ -23,6 +23,10 @@ struct HashTable {
     enum CellType* types;
     int bucketCount;
     int elementCount;
+
+    int (* getHash)(char*, int);
+
+    int (* getIndex)(int, int, int);
 };
 
 void addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes);
@@ -43,7 +47,7 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
     return newElement;
 }
 
-HashTable* createHashTableWithSize(int size)
+HashTable* createHashTableWithSize(int size, int (* getHash)(char*, int), int (* getIndex)(int, int, int))
 {
     HashTable* newTable = (HashTable*)malloc(sizeof(HashTable));
     newTable->hashTable = (HashElement**)malloc(sizeof(HashElement*) * size);
@@ -52,12 +56,14 @@ HashTable* createHashTableWithSize(int size)
     newTable->bucketCount = size;
     memset(newTable->hashTable, 0, size * sizeof(HashElement*));
     newTable->elementCount = 0;
+    newTable->getHash = getHash;
+    newTable->getIndex = getIndex;
     return newTable;
 }
 
-HashTable* createHashTable()
+HashTable* createHashTable(int (* getHash)(char*, int), int (* getIndex)(int, int, int))
 {
-    return createHashTableWithSize(1);
+    return createHashTableWithSize(1, getHash, getIndex);
 }
 
 void destroyHashTable(HashTable* table)
@@ -106,9 +112,9 @@ void addElement(HashTable* table, char* key, int value)
 
 void addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes)
 {
-    int hash = getHash(key, table->bucketCount);
+    int hash = table->getHash(key, table->bucketCount);
     int currentNumberOfProbes = 1;
-    int currentIndex = getIndex(hash, table->bucketCount, currentNumberOfProbes);
+    int currentIndex = table->getIndex(hash, table->bucketCount, currentNumberOfProbes);
     while (table->types[currentIndex] == used) {
         if (strcmp(key, table->hashTable[currentIndex]->key) == 0) {
             table->hashTable[currentIndex]->value += value;
@@ -118,7 +124,7 @@ void addElementWithProbes(HashTable* table, char* key, int value, int numberOfPr
             return;
         }
         ++currentNumberOfProbes;
-        currentIndex = getIndex(hash, table->bucketCount, currentNumberOfProbes);
+        currentIndex = table->getIndex(hash, table->bucketCount, currentNumberOfProbes);
     }
     HashElement* newElement = createHashElement(key, value, numberOfProbes);
     newElement->numberOfProbes = currentNumberOfProbes;
@@ -131,9 +137,9 @@ void addElementWithProbes(HashTable* table, char* key, int value, int numberOfPr
 
 bool removeElement(HashTable* table, char* key)
 {
-    int hash = getHash(key, table->bucketCount);
+    int hash = table->getHash(key, table->bucketCount);
     int currentNumberOfProbes = 1;
-    int startIndex = getIndex(hash, table->bucketCount, currentNumberOfProbes);
+    int startIndex = table->getIndex(hash, table->bucketCount, currentNumberOfProbes);
     int currentIndex = startIndex;
     do {
         if (table->types[currentIndex] == used && (strcmp(key, table->hashTable[currentIndex]->key) == 0)) {
@@ -145,7 +151,7 @@ bool removeElement(HashTable* table, char* key)
             return true;
         }
         ++currentNumberOfProbes;
-        currentIndex = getIndex(hash, table->bucketCount, currentNumberOfProbes);
+        currentIndex = table->getIndex(hash, table->bucketCount, currentNumberOfProbes);
     } while (currentIndex != startIndex);
     return false;
 }
