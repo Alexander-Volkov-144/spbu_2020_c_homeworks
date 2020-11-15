@@ -21,7 +21,7 @@ void printTheNecessaryInformation(HashTable* words)
 int main()
 {
     FILE* input = NULL;
-    input = fopen("input.txt", "r");
+    input = fopen("/media/user/Data/input.txt", "r");
     if (input == NULL) {
         printf("file \"input.txt\"not found");
         return 0;

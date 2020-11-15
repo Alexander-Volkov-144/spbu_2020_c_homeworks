@@ -1,0 +1,6 @@
+#ifndef SPBU_2020_C_HOMEWORKS_INDEXGENERATION_H
+#define SPBU_2020_C_HOMEWORKS_INDEXGENERATION_H
+
+int getIndex(int hash, int module, int numberOfProbes);
+
+#endif //SPBU_2020_C_HOMEWORKS_INDEXGENERATION_H

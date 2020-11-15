@@ -1,4 +1,6 @@
 #include "hashTable.h"
+#include "../hashFunctions/hashComputation.h"
+#include "../indexGeneration/indexGeneration.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,16 +62,6 @@ HashTable* createHashTable()
     return createHashTableWithSize(1);
 }
 
-int getHash(char* key, int module)
-{
-    int size = (int)strlen(key);
-    int currentHash = 0;
-    for (int i = 0; i < size; ++i) {
-        currentHash = ((currentHash * 2) + (key[i] - 'a')) % module;
-    }
-    return currentHash;
-}
-
 void destroyHashTable(HashTable* table)
 {
     for (int i = 0; i < table->bucketCount; ++i) {
@@ -112,11 +104,6 @@ void expandTable(HashTable* table)
 void addElement(HashTable* table, char* key, int value)
 {
     addElementWithProbes(table, key, value, 1);
-}
-
-int getIndex(int hash, int module, int numberOfProbes)
-{
-    return (hash + ((numberOfProbes - 1) * numberOfProbes) / 2) % module;
 }
 
 void addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes)
@@ -220,7 +207,8 @@ bool inArray(const int* array, int size, int value)
 
 bool isLarger(HashTable* table, int* alreadyCounted, int numberOfElements, int index, int maximumValue, bool notFound)
 {
-    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) && (table->hashTable[index]->value > maximumValue || notFound);
+    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) &&
+           (table->hashTable[index]->value > maximumValue || notFound);
 }
 
 void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
