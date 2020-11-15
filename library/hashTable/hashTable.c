@@ -24,9 +24,9 @@ struct HashTable {
     int bucketCount;
     int elementCount;
 
-    int (* getHash)(char*, int);
+    int (*getHash)(char*, int);
 
-    int (* getIndex)(int, int, int);
+    int (*getIndex)(int, int, int);
 };
 
 void addElementWithProbes(HashTable* table, char* key, int value, int numberOfProbes);
@@ -47,7 +47,7 @@ HashElement* createHashElement(char* key, int value, int numberOfProbes)
     return newElement;
 }
 
-HashTable* createHashTableWithSize(int size, int (* getHash)(char*, int), int (* getIndex)(int, int, int))
+HashTable* createHashTableWithSize(int size, int (*getHash)(char*, int), int (*getIndex)(int, int, int))
 {
     HashTable* newTable = (HashTable*)malloc(sizeof(HashTable));
     newTable->hashTable = (HashElement**)malloc(sizeof(HashElement*) * size);
@@ -61,7 +61,7 @@ HashTable* createHashTableWithSize(int size, int (* getHash)(char*, int), int (*
     return newTable;
 }
 
-HashTable* createHashTable(int (* getHash)(char*, int), int (* getIndex)(int, int, int))
+HashTable* createHashTable(int (*getHash)(char*, int), int (*getIndex)(int, int, int))
 {
     return createHashTableWithSize(1, getHash, getIndex);
 }
