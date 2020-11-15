@@ -10,7 +10,7 @@ add_library(list STATIC library/list/list.c)
 add_library(hashTable STATIC library/hashTable/hashTable.c)
 add_library(bst STATIC library/bst/bst.c)
 add_library(complexNumber library/complexNumber/complexNumber.c)
-add_library(fileProcessing library/fileProcessing/fileProcessing.c)
+add_library(fileProcessing library/fileProcessing/fileProcessing.c library/stringManipulations/stringManipulations.c)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
