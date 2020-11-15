@@ -207,8 +207,7 @@ bool inArray(const int* array, int size, int value)
 
 bool isLarger(HashTable* table, int* alreadyCounted, int numberOfElements, int index, int maximumValue, bool notFound)
 {
-    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) &&
-           (table->hashTable[index]->value > maximumValue || notFound);
+    return (!inArray(alreadyCounted, numberOfElements, index)) && (table->types[index] == used) && (table->hashTable[index]->value > maximumValue || notFound);
 }
 
 void printElementsWithBiggestValues(HashTable* table, int numberOfElements)
