@@ -27,11 +27,11 @@ char* readWordFromFile(FILE* file)
 
     word[i] = '\0';
     if (feof(file)) {
-        if(size > 1)
+        if (size > 1)
             return word;
-        else{
-        free(word);
-        return NULL;
+        else {
+            free(word);
+            return NULL;
         }
     }
     return word;
