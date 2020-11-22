@@ -50,3 +50,4 @@ add_executable(task_6.1 homework_6/task_6.1.c)
 target_link_libraries(task_6.1 hashTable fileProcessing)
 
 add_executable(test_2.1 test_2/test_2.1.c)
+add_executable(test_2.2 test_2/test_2.2.c)
