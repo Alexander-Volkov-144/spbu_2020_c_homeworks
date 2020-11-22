@@ -10,7 +10,7 @@ add_library(list STATIC library/list/list.c)
 add_library(hashTable STATIC library/hashTable/hashTable.c)
 add_library(bst STATIC library/bst/bst.c)
 add_library(complexNumber library/complexNumber/complexNumber.c)
-add_library(graph library/graph/graph.c
+add_library(graph library/graph/graph.c)
 add_library(avl STATIC library/avl/avl.c)
 add_library(complexNumber library/complexNumber/complexNumber.c)
 add_library(fileProcessing library/fileProcessing/fileProcessing.c)
