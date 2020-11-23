@@ -120,3 +120,5 @@ void getAllVertexesConnectedToGiven(Graph* graph, int vertex, bool* result)
         }
     }
 }
+
+int getNearestVertex(Graph* graph, int originalVertex, bool* vertexesThatCanBeUsed){}
