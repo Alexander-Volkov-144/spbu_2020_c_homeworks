@@ -66,7 +66,8 @@ bool addNearestCity(Graph* connectedTowns, bool* canBeAdded, State* state)
     return true;
 }
 
-void printAllCities(State* state){
+void printAllCities(State* state)
+{
     printf("cities: ");
     for (int j = 0; j < state->numberOfCities; ++j) {
         printf("%d ", state->cities[j]);
