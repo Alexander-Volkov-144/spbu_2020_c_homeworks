@@ -1,0 +1,9 @@
+
+#ifndef SPBU_2020_C_HOMEWORKS_FILEPROCESSING_H
+#define SPBU_2020_C_HOMEWORKS_FILEPROCESSING_H
+
+#include <stdio.h>
+
+char* readWordFromFile(FILE* file);
+
+#endif //SPBU_2020_C_HOMEWORKS_FILEPROCESSING_H
