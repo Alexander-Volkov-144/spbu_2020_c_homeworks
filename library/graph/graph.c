@@ -53,6 +53,7 @@ bool removeGraph(Graph* graph)
     }
     free(graph->matrix);
     free(graph);
+    return true;
 }
 
 bool isConnected(int fromVertex, int toVertex, Graph* graph)
@@ -121,4 +122,15 @@ void getAllVertexesConnectedToGiven(Graph* graph, int vertex, bool* result)
     }
 }
 
-int getNearestVertex(Graph* graph, int originalVertex, bool* vertexesThatCanBeUsed){}
+bool getNearestVertex(Graph* graph, int originalVertex, const bool* vertexesThatCanBeUsed, int* nearestVertex,int* weightOfEdge)
+{
+    *nearestVertex = -1;
+    *weightOfEdge = 0;
+    for (int i = 0; i < graph->countVertex; ++i) {
+        if ((graph->matrix[originalVertex][i] < *weightOfEdge && graph->matrix[originalVertex][i] != 0 || nearestVertex == -1) && vertexesThatCanBeUsed[i]) {
+            nearestVertex = i;
+            *weightOfEdge = graph->matrix[originalVertex][i];
+        }
+    }
+    return *nearestVertex != -1;
+}
