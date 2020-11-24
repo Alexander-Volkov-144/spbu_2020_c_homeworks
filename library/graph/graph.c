@@ -122,13 +122,13 @@ void getAllVertexesConnectedToGiven(Graph* graph, int vertex, bool* result)
     }
 }
 
-bool getNearestVertex(Graph* graph, int originalVertex, const bool* vertexesThatCanBeUsed, int* nearestVertex,int* weightOfEdge)
+bool getNearestVertex(Graph* graph, int originalVertex, const bool* vertexesThatCanBeUsed, int* nearestVertex, int* weightOfEdge)
 {
     *nearestVertex = -1;
     *weightOfEdge = 0;
     for (int i = 0; i < graph->countVertex; ++i) {
-        if ((graph->matrix[originalVertex][i] < *weightOfEdge && graph->matrix[originalVertex][i] != 0 || nearestVertex == -1) && vertexesThatCanBeUsed[i]) {
-            nearestVertex = i;
+        if (((graph->matrix[originalVertex][i] < *weightOfEdge) || (*nearestVertex == -1)) && (graph->matrix[originalVertex][i] != 0) && (vertexesThatCanBeUsed[i])) {
+            *nearestVertex = i;
             *weightOfEdge = graph->matrix[originalVertex][i];
         }
     }
