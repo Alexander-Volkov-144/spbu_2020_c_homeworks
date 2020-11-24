@@ -72,8 +72,8 @@ Person** readAListOfPeopleFromAFile(FILE* file, int* peopleCount)
             partyMembers[index] = createPerson(currentWord, currentLoyalty, undefined);
             ++index;
         }
+        free(currentWord);
     }
-    free(currentWord);
     *peopleCount = index;
     return partyMembers;
 }
