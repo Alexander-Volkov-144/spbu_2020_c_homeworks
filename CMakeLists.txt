@@ -14,7 +14,7 @@ add_library(graph library/graph/graph.c)
 add_library(avl STATIC library/avl/avl.c)
 add_library(fileProcessing library/fileProcessing/fileProcessing.c)
 add_library(stringManipulations library/stringManipulations/stringManipulations.c)
-target_link_libraries(fileProcessing stringManipulations.c)
+target_link_libraries(fileProcessing stringManipulations)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
@@ -44,17 +44,18 @@ add_executable(task_5.2 homework_5/task_5.2.c)
 target_link_libraries(task_5.1 bst)
 target_link_libraries(task_5.2 avl)
 
-add_executable(test_1.1 test_1/test_1.1.c)
-add_executable(test_1.2 test_1/test_1.2.c)
-target_link_libraries(test_1.2 complexNumber)
+add_executable(task_6.1 homework_6/task_6.1.c)
+target_link_libraries(task_6.1 hashTable fileProcessing)
 
 add_executable(task_7.1 homework_7/task_7.1.c)
 add_executable(task_7.2 homework_7/task_7.2.c)
 target_link_libraries(task_7.1 graph)
 target_link_libraries(task_7.2 graph)
 
-add_executable(task_6.1 homework_6/task_6.1.c)
-target_link_libraries(task_6.1 hashTable fileProcessing)
+
+add_executable(test_1.1 test_1/test_1.1.c)
+add_executable(test_1.2 test_1/test_1.2.c)
+target_link_libraries(test_1.2 complexNumber)
 
 add_executable(test_2.1 test_2/test_2.1.c)
 add_executable(test_2.2 test_2/test_2.2.c)
