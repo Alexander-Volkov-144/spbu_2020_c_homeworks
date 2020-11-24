@@ -83,7 +83,7 @@ int comparePersonsByLoyalty(Person** person1, Person** person2)
     if ((*person1)->loyalty > (*person2)->loyalty) {
         return 1;
     } else {
-        if ((*person1)->loyalty < (*person2)->loyalty) { ;
+        if ((*person1)->loyalty < (*person2)->loyalty) { 
             return -1;
         }
     }
