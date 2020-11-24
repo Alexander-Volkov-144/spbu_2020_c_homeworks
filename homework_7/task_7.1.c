@@ -11,7 +11,7 @@ Edge** getNumbers(int numberOfStudents)
     int number = 0, copiedFrom = 0;
     for (int i = 0; i < numberOfStudents; ++i) {
         scanf("%d%d", &number, &copiedFrom);
-        if (-1 == copiedFrom)
+        if (copiedFrom == -1)
             copiedFrom = 0;
         students[i] = createEdge(copiedFrom, number, 1, true);
     }
@@ -27,7 +27,7 @@ int* findOriginal(Graph* copiedWorks, int numberOfStudents)
         memset(isCopied, false, (numberOfStudents + 4) * sizeof(bool));
         getAllVertexesConnectedToGiven(copiedWorks, i, isCopied);
         for (int j = 0; j < numberOfStudents + 4; ++j) {
-            if (true == isCopied[j])
+            if (isCopied[j])
                 worksSources[j] = i;
         }
     }
