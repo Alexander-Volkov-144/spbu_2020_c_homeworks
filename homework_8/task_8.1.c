@@ -1,37 +1,39 @@
 #include <stdio.h>
-#include <stdlib.h>
-
 #include "../library/dfa/dfa.h"
+
+DFA* constructDfa(){
+    DFAState* initialState = createDFAState(false);
+    DFA* newDFA = createDFA(initialState);
+
+    DFAState* signInIntegerPart = createDFAState(false);
+    DFAState* digitInIntegerPart = createDFAState(true);
+    DFAState* digitInFractionalPart = createDFAState(true);
+    DFAState* exponent = createDFAState(false);
+    DFAState* signInExponent = createDFAState(false);
+    DFAState* digitInExponent = createDFAState(true);
+
+    addTransition(initialState, '+', signInIntegerPart);
+    addTransition(initialState, '-', signInIntegerPart);
+    addTransition(digitInIntegerPart, '.', digitInFractionalPart);
+    addTransition(digitInFractionalPart, 'E', exponent);
+    addTransition(exponent, '+', signInExponent);
+    addTransition(exponent, '-', signInExponent);
+
+    for(char digit = '0'; digit <= '9'; ++digit){
+        addTransition(initialState, digit, digitInIntegerPart);
+        addTransition(signInIntegerPart, digit, digitInIntegerPart);
+        addTransition(digitInIntegerPart, digit, digitInIntegerPart);
+        addTransition(digitInFractionalPart, digit, digitInFractionalPart);
+        addTransition(signInExponent, digit, digitInExponent);
+        addTransition(digitInExponent, digit, digitInExponent);
+    }
+    return newDFA;
+}
 
 int main()
 {
-    DFAState* failState = createDFAState(0, false);
-    DFAState* initialState = createDFAState(1, false);
-    DFA* newDFA = createDFA(initialState);
-
-    DFAState* firstState = createDFAState(2, false);
-    DFAState* secondState = createDFAState(3, false);
-    DFAState* thirdState = createDFAState(4, true);
-
-    addTransition(initialState, 'a', firstState);
-    addTransition(initialState, 'b', initialState);
-
-    addTransition(firstState, 'a', firstState);
-    addTransition(firstState, 'b', secondState);
-
-    addTransition(secondState, 'a', firstState);
-    addTransition(secondState, 'b', thirdState);
-
-    addTransition(thirdState, 'a', firstState);
-    addTransition(thirdState, 'b', initialState);
-
-    printf("%d\n", isStringCorrect("a", newDFA) ? 1 : 0);
-    printf("%d\n", isStringCorrect("0123a", newDFA) ? 1 : 0);
-    printf("%d\n", isStringCorrect("abacaba", newDFA) ? 1 : 0);
-
-    printf("%d\n", isStringCorrect("abb", newDFA) ? 1 : 0);
-    printf("%d\n", isStringCorrect("ababb", newDFA) ? 1 : 0);
-    printf("%d\n", isStringCorrect("abababb", newDFA) ? 1 : 0);
-
+    //DFA* dfa = constructDfa();
+    char* string = NULL;
+    printf("enter the expression\n");
     return 0;
 }

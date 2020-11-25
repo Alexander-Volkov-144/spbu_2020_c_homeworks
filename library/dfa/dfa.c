@@ -1,5 +1,6 @@
 #include "dfa.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -9,7 +10,6 @@ typedef struct Transition {
 } Transition;
 
 struct DFAState {
-    int id;
     bool isFinal;
     int transitionsSize;
     int transitionAllocationSize;
@@ -34,15 +34,14 @@ DFA* createDFA(DFAState* initialState)
 {
     DFA* dfa = (DFA*)malloc(sizeof(DFA*));
     dfa->initialState = initialState;
-    dfa->failState = createDFAState(-1, false);
+    dfa->failState = createDFAState(false);
 
     return dfa;
 }
 
-DFAState* createDFAState(int id, bool isFinal)
+DFAState* createDFAState(bool isFinal)
 {
     DFAState* dfaState = (DFAState*)malloc(sizeof(DFAState));
-    dfaState->id = id;
     dfaState->isFinal = isFinal;
     dfaState->transitionsSize = 0;
     dfaState->transitionAllocationSize = 1;
@@ -84,20 +83,4 @@ bool isStringCorrect (char* string, DFA* dfa)
     }
 
     return currentDfaState->isFinal;
-}
-
-void printDFAStateTransitions(DFAState* dfaState, bool* used)
-{
-    for (int i = 0; i < dfaState->transitionsSize; ++i) {
-        Transition* transition = dfaState->transitions[i];
-        printf("(%d %c) -> %d", dfaState->id, transition->symbol, transition->transitionState->id);
-    }
-    used[dfaState->id] = true;
-
-}
-
-void printDFATransitions(DFA* dfa)
-{
-    bool* used = (bool*)malloc(sizeof(bool));
-    DFAState* initialState = dfa->initialState;
 }

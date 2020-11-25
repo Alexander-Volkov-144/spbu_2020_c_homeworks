@@ -9,7 +9,7 @@ typedef struct DFA DFA;
 
 DFA* createDFA(DFAState* initialState);
 
-DFAState* createDFAState(int id, bool isFinal);
+DFAState* createDFAState(bool isFinal);
 
 void addTransition(DFAState* firstState, char value, DFAState* secondState);
 
