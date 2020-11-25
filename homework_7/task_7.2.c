@@ -78,7 +78,7 @@ void printAllCities(State* state)
 int main()
 {
     FILE* file = NULL;
-    file = fopen("cities_and_roads", "r");
+    file = fopen("cities_and_roads.txt", "r");
     if (file == NULL) {
         printf("file not found");
         return 0;

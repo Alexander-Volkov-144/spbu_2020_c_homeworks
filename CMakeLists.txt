@@ -50,6 +50,9 @@ target_link_libraries(test_1.2 complexNumber)
 
 add_executable(task_7.1 homework_7/task_7.1.c)
 target_link_libraries(task_7.1 graph)
+add_executable(task_7.2 homework_7/task_7.2.c)
+target_link_libraries(task_7.2 graph)
+
 add_executable(task_6.1 homework_6/task_6.1.c)
 target_link_libraries(task_6.1 hashTable fileProcessing)
 
