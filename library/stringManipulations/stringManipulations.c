@@ -24,3 +24,22 @@ char* doubleSize(char* oldString, int* oldSize)
     *oldSize *= 2;
     return newString;
 }
+
+char* readString(){
+    char* newString = (char*)malloc(sizeof(char));
+    int size = 1;
+    char currentCharacter = 0;
+    scanf("%c",&currentCharacter);
+    int index = 0;
+    while((currentCharacter != '\0') && (currentCharacter != '\n')){
+        if(index == size)
+            newString = doubleSize(newString, &size);
+        newString[index] = currentCharacter;
+        ++index;
+        scanf("%c",&currentCharacter);
+    }
+    if(index == size)
+        newString = doubleSize(newString, &size);
+    newString[index] = '\0';
+    return newString;
+}

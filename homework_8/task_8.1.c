@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "../library/dfa/dfa.h"
+#include "../library/stringManipulations/stringManipulations.h"
+#include <stdlib.h>
 
 DFA* constructDfa(){
     DFAState* initialState = createDFAState(false);
@@ -33,7 +35,9 @@ DFA* constructDfa(){
 int main()
 {
     //DFA* dfa = constructDfa();
-    char* string = NULL;
     printf("enter the expression\n");
+    char* string = readString();
+    printf("%s",string);
+    free(string);
     return 0;
 }

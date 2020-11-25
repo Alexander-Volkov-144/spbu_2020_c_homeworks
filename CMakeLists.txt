@@ -49,3 +49,4 @@ target_link_libraries(task_6.1 hashTable fileProcessing)
 
 add_executable(task_8.1 homework_8/task_8.1.c)
 target_link_libraries(task_8.1 dfa)
+target_link_libraries(task_8.1 stringManipulations)
