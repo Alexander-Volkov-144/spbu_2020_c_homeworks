@@ -1,12 +1,12 @@
-#include <stdio.h>
 #include "../library/dfa/dfa.h"
 #include "../library/stringManipulations/stringManipulations.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-DFA* constructDfa()
+bool checkString(char* string)
 {
     DFAState* initialState = createDFAState(false);
-    DFA* newDFA = createDFA(initialState);
+    DFA* dfa = createDFA(initialState);
 
     DFAState* signInIntegerPart = createDFAState(false);
     DFAState* digitInIntegerPart = createDFAState(true);
@@ -34,15 +34,27 @@ DFA* constructDfa()
         addTransition(exponent, digit, digitInExponent);
         addTransition(digitInExponent, digit, digitInExponent);
     }
-    return newDFA;
+
+    bool isCorrect = isStringCorrect(string, dfa);
+
+    removeDFAState(initialState);
+    removeDFAState(signInIntegerPart);
+    removeDFAState(digitInIntegerPart);
+    removeDFAState(dot);
+    removeDFAState(digitInFractionalPart);
+    removeDFAState(exponent);
+    removeDFAState(signInExponent);
+    removeDFAState(digitInExponent);
+    removeDFA(dfa);
+
+    return isCorrect;
 }
 
 int main()
 {
-    DFA* dfa = constructDfa();
     printf("enter the expression\n");
     char* string = readString();
-    if (isStringCorrect(string, dfa))
+    if (checkString(string))
         printf("the entered string is a number\n");
     else
         printf("the entered string is not a number\n");

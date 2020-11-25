@@ -31,7 +31,7 @@ Transition* createTransition(char symbol, DFAState* transitionState)
 
 DFA* createDFA(DFAState* initialState)
 {
-    DFA* dfa = (DFA*)malloc(sizeof(DFA*));
+    DFA* dfa = (DFA*)malloc(sizeof(DFA));
     dfa->initialState = initialState;
     dfa->failState = createDFAState(false);
 
@@ -48,11 +48,26 @@ DFAState* createDFAState(bool isFinal)
     return dfaState;
 }
 
+void removeDFA(DFA* dfa)
+{
+    removeDFAState(dfa->failState);
+    free(dfa);
+}
+
 void reallocTransition(DFAState* dfaState)
 {
     dfaState->transitions = realloc(dfaState->transitions, dfaState->transitionAllocationSize * 2 * sizeof(Transition*));
     memset(dfaState->transitions + dfaState->transitionAllocationSize, 0, dfaState->transitionAllocationSize * sizeof(Transition*));
     dfaState->transitionAllocationSize *= 2;
+}
+
+void removeDFAState(DFAState* dfaState)
+{
+    for(int i = 0; i < dfaState->transitionsSize; ++i){
+        free(dfaState->transitions[i]);
+    }
+    free(dfaState->transitions);
+    free(dfaState);
 }
 
 void addTransition(DFAState* firstState, char value, DFAState* secondState)
@@ -65,7 +80,7 @@ void addTransition(DFAState* firstState, char value, DFAState* secondState)
     firstState->transitionsSize++;
 }
 
-bool isStringCorrect (char* string, DFA* dfa)
+bool isStringCorrect(char* string, DFA* dfa)
 {
     DFAState* currentDfaState = dfa->initialState;
     for (int i = 0; i < strlen(string); ++i) {
