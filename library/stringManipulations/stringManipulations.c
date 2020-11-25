@@ -25,20 +25,21 @@ char* doubleSize(char* oldString, int* oldSize)
     return newString;
 }
 
-char* readString(){
+char* readString()
+{
     char* newString = (char*)malloc(sizeof(char));
     int size = 1;
     char currentCharacter = 0;
-    scanf("%c",&currentCharacter);
+    scanf("%c", &currentCharacter);
     int index = 0;
-    while((currentCharacter != '\0') && (currentCharacter != '\n')){
-        if(index == size)
+    while ((currentCharacter != '\0') && (currentCharacter != '\n')) {
+        if (index == size)
             newString = doubleSize(newString, &size);
         newString[index] = currentCharacter;
         ++index;
-        scanf("%c",&currentCharacter);
+        scanf("%c", &currentCharacter);
     }
-    if(index == size)
+    if (index == size)
         newString = doubleSize(newString, &size);
     newString[index] = '\0';
     return newString;

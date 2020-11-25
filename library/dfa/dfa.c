@@ -63,7 +63,7 @@ void reallocTransition(DFAState* dfaState)
 
 void removeDFAState(DFAState* dfaState)
 {
-    for(int i = 0; i < dfaState->transitionsSize; ++i){
+    for (int i = 0; i < dfaState->transitionsSize; ++i) {
         free(dfaState->transitions[i]);
     }
     free(dfaState->transitions);
