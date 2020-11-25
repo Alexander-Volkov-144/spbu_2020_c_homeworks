@@ -15,6 +15,4 @@ void addTransition(DFAState* firstState, char value, DFAState* secondState);
 
 bool isStringCorrect(char* string, DFA* dfa);
 
-void printDFATransitions(DFA* dfa);
-
 #endif //SPBU_2020_C_HOMEWORKS_DFA_H
