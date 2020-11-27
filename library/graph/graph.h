@@ -25,4 +25,7 @@ bool removeGraph(Graph* graph);
 
 bool removeArrayOfEdges(Edge** array, int size);
 
+bool getNearestVertex(Graph* graph, int originalVertex, const bool* vertexesThatCanBeUsed, int* nearestVertex,int* weightOfEdge);
+
+
 #endif //SPBU_2020_C_HOMEWORKS_GRAPH_H
