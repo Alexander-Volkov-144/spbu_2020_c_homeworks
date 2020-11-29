@@ -15,6 +15,8 @@ DFAState* createDFAState(bool isFinal);
 
 void removeDFAState(DFAState* dfaState);
 
+void deleteDFAStates(DFAState** states, int numberOfStates);
+
 void addTransition(DFAState* firstState, char value, DFAState* secondState);
 
 bool isStringCorrect(char* string, DFA* dfa);

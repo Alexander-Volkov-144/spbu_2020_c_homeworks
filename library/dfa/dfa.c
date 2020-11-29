@@ -54,6 +54,13 @@ void removeDFA(DFA* dfa)
     free(dfa);
 }
 
+void deleteDFAStates(DFAState** states, int numberOfStates)
+{
+    for (int i = 0; i < numberOfStates; ++i) {
+        removeDFAState(states[i]);
+    }
+}
+
 void reallocTransition(DFAState* dfaState)
 {
     dfaState->transitions = realloc(dfaState->transitions, dfaState->transitionAllocationSize * 2 * sizeof(Transition*));
