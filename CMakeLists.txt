@@ -15,6 +15,7 @@ add_library(avl STATIC library/avl/avl.c)
 add_library(fileProcessing library/fileProcessing/fileProcessing.c)
 add_library(stringManipulations library/stringManipulations/stringManipulations.c)
 target_link_libraries(fileProcessing stringManipulations)
+add_library(dfa library/dfa/dfa.c)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
@@ -55,6 +56,10 @@ target_link_libraries(task_7.2 graph)
 
 add_executable(task_6.1 homework_6/task_6.1.c)
 target_link_libraries(task_6.1 hashTable fileProcessing)
+
+add_executable(task_8.1 homework_8/task_8.1.c)
+target_link_libraries(task_8.1 dfa)
+target_link_libraries(task_8.1 stringManipulations)
 
 add_executable(test_2.1 test_2/test_2.1.c)
 add_executable(test_2.2 test_2/test_2.2.c)
