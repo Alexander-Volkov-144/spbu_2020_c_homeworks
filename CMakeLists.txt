@@ -61,6 +61,8 @@ add_executable(task_8.1 homework_8/task_8.1.c)
 target_link_libraries(task_8.1 dfa)
 target_link_libraries(task_8.1 stringManipulations)
 
+add_executable(task_9.1 homework_9/task_9.1.c)
+
 add_executable(test_2.1 test_2/test_2.1.c)
 add_executable(test_2.2 test_2/test_2.2.c)
 add_executable(test_2.3_new test_2/test_2.3_new.c)
