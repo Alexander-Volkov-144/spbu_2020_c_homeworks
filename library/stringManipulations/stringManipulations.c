@@ -44,3 +44,18 @@ char* readString()
     newString[index] = '\0';
     return newString;
 }
+
+void removeCharacter(char* string, char character){
+    char* newString = (char*)malloc((strlen(string) + 1) * sizeof(char));
+    memset(newString, 0, (strlen(string) + 1) * sizeof(char));
+    int index = 0;
+    for(int i = 0; i <= strlen(string); ++i){
+        if(string[i] != character){
+            newString[index] = string[i];
+            ++index;
+        }
+    }
+    newString[index] = '\0';
+    free(string);
+    string = newString;
+}

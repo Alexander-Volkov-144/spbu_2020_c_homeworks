@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "../stringManipulations/stringManipulations.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,16 +69,8 @@ bool J(char* string, int size, int* current){
 }
 
 bool isCorrect(char* string, int size){
-    char* characters = (char*)malloc(sizeof(char) * (size / 2 + 1));
-    memset(characters, 0, sizeof(char) * (size / 2 + 1));
-    int index = 0;
-    for(int i = 0; i < size; ++i){
-        if(string[i] != ' '){
-            characters[index] = string[i];
-            ++index;
-        }
-    }
+    removeCharacter(string,' ');
     int current = 0;
-    bool result = E(characters, index, &current);
-    return result && current == index;
+    bool result = E(string, strlen(string), &current);
+    return result && current == strlen(string);
 }

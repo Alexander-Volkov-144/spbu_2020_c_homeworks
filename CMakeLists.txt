@@ -16,6 +16,8 @@ add_library(fileProcessing library/fileProcessing/fileProcessing.c)
 add_library(stringManipulations library/stringManipulations/stringManipulations.c)
 target_link_libraries(fileProcessing stringManipulations)
 add_library(dfa library/dfa/dfa.c)
+add_library(parser library/parser/parser.c)
+target_link_libraries(parser stringManipulations)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
@@ -62,6 +64,7 @@ target_link_libraries(task_8.1 dfa)
 target_link_libraries(task_8.1 stringManipulations)
 
 add_executable(task_9.1 homework_9/task_9.1.c)
+target_link_libraries(task_9.1 stringManipulations parser)
 
 add_executable(test_2.1 test_2/test_2.1.c)
 add_executable(test_2.2 test_2/test_2.2.c)
