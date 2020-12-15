@@ -85,4 +85,5 @@ void removeTDArray(TDArray* array)
         free(array->array[i]);
     }
     free(array->array);
+    free(array);
 }
