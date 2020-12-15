@@ -48,8 +48,7 @@ void printSaddlePoints(TDArray* array)
             }
         }
     }
-
-
+    
     int currentMaximum = array->array[0][0];
     for (int j = 0; j < array->columnCount; ++j) { // внешний цикл по j, чтобы сохранить привычный порядок индексов i, j при обращении к массиву
         currentMaximum = array->array[0][j];
