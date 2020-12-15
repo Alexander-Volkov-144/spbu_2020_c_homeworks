@@ -37,7 +37,6 @@ void printSaddlePoints(TDArray* array)
     memset(indexesOfMinimumsInLines, 0, sizeof(int) * array->columnCount);
     int* indexesOfMaximumsInColumns = (int*)malloc(sizeof(int) * array->lineCount);
     memset(indexesOfMaximumsInColumns, 0, sizeof(int) * array->lineCount);
-
     int currentMinimum = 0;
     for (int i = 0; i < array->lineCount; ++i) {
         currentMinimum = array->array[i][0];
@@ -48,7 +47,6 @@ void printSaddlePoints(TDArray* array)
             }
         }
     }
-    
     int currentMaximum = array->array[0][0];
     for (int j = 0; j < array->columnCount; ++j) { // внешний цикл по j, чтобы сохранить привычный порядок индексов i, j при обращении к массиву
         currentMaximum = array->array[0][j];
@@ -59,7 +57,6 @@ void printSaddlePoints(TDArray* array)
             }
         }
     }
-
     for (int i = 0; i < array->lineCount; ++i) {
         for (int j = 0; j < array->columnCount; ++j) {
             if ((indexesOfMinimumsInLines[i] == j) && (indexesOfMaximumsInColumns[j] == i)) {
