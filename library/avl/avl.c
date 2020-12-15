@@ -291,3 +291,17 @@ void printTree(AVLTree* tree)
     printNodeRecursive(tree->root);
     printf("\n\n");
 }
+
+void printAllElementsInAscendingOrderRecursive(AVLNode* node)
+{
+    if (node->leftChild != NULL)
+        printAllElementsInAscendingOrderRecursive(node->leftChild);
+    printf("%d ", node->value);
+    if (node->rightChild != NULL)
+        printAllElementsInAscendingOrderRecursive(node->rightChild);
+}
+
+void printAllElementsInAscendingOrder(AVLTree* tree)
+{
+    printAllElementsInAscendingOrderRecursive(tree->root);
+}
