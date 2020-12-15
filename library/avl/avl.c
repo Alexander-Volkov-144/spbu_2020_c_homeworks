@@ -307,6 +307,6 @@ void printAllElementsInAscendingOrderRecursive(AVLNode* node)
 
 void printAllElementsInAscendingOrder(AVLTree* tree)
 {
-    if(tree->root != NULL)
+    if (tree->root != NULL)
         printAllElementsInAscendingOrderRecursive(tree->root);
 }
