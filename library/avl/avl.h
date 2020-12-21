@@ -17,4 +17,7 @@ bool removeValue(AVLTree* tree, int value);
 
 void printTree(AVLTree* tree);
 
+void printAllElementsInAscendingOrder(AVLTree* tree);
+
+
 #endif //SPBU_2020_C_HOMEWORKS_AVL_H

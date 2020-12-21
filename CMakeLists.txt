@@ -65,3 +65,6 @@ add_executable(test_2.1 test_2/test_2.1.c)
 add_executable(test_2.2 test_2/test_2.2.c)
 add_executable(test_2.3_new test_2/test_2.3_new.c)
 target_link_libraries(test_2.3_new fileProcessing)
+
+add_executable(test_3.1 test_3/test_3.1.c)
+target_link_libraries(test_3.1 avl)

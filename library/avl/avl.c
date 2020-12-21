@@ -7,6 +7,7 @@ typedef struct AVLNode {
     struct AVLNode* leftChild;
     struct AVLNode* rightChild;
     int height;
+    int amount;
 } AVLNode;
 
 struct AVLTree {
@@ -156,12 +157,14 @@ AVLNode* createNode(int value)
     node->leftChild = NULL;
     node->value = value;
     node->height = 1;
+    node->amount = 1;
     return node;
 }
 
 bool addValueRecursive(AVLNode* node, int value)
 {
     if (node->value == value) {
+        node->amount++;
         return false;
     }
     if (node->value > value) {
@@ -186,7 +189,8 @@ bool addValue(AVLTree* tree, int value)
 {
     if (isEmpty(tree))
         tree->root = createNode(value);
-    addValueRecursive(tree->root, value);
+    else
+        addValueRecursive(tree->root, value);
     tree->root = balance(tree->root);
     return true;
 }
@@ -290,4 +294,19 @@ void printTree(AVLTree* tree)
     printf("\n");
     printNodeRecursive(tree->root);
     printf("\n\n");
+}
+
+void printAllElementsInAscendingOrderRecursive(AVLNode* node)
+{
+    if (node->leftChild != NULL)
+        printAllElementsInAscendingOrderRecursive(node->leftChild);
+    printf("%d - %d\n", node->value, node->amount);
+    if (node->rightChild != NULL)
+        printAllElementsInAscendingOrderRecursive(node->rightChild);
+}
+
+void printAllElementsInAscendingOrder(AVLTree* tree)
+{
+    if (tree->root != NULL)
+        printAllElementsInAscendingOrderRecursive(tree->root);
 }
