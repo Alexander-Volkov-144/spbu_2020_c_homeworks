@@ -16,6 +16,7 @@ add_library(fileProcessing library/fileProcessing/fileProcessing.c)
 add_library(stringManipulations library/stringManipulations/stringManipulations.c)
 target_link_libraries(fileProcessing stringManipulations)
 add_library(dfa library/dfa/dfa.c)
+add_library(priorityQueue library/priorityQueue/priorityQueue.c)
 
 add_executable(task_1 homework_1/task_1.c)
 add_executable(task_2 homework_1/task_2.c library/commonUtils/reverseArray.c)
@@ -68,3 +69,5 @@ target_link_libraries(test_2.3_new fileProcessing)
 
 add_executable(test_3.1 test_3/test_3.1.c)
 target_link_libraries(test_3.1 avl)
+add_executable(test_3.2 test_3/test_3.2.c)
+target_link_libraries(test_3.2 priorityQueue)
