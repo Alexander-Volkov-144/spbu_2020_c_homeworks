@@ -49,7 +49,6 @@ void addStatesAndTransitions(DFAState** states)
     addTransition(possibleLastCharacters, '-', otherCharacters);
 
     addTransition(firstPart, '@', atSign);
-
 }
 
 bool checkString(char* string)
@@ -71,7 +70,7 @@ bool checkString(char* string)
 
 int main()
 {
-    printf("enter the expression\n");
+    printf("enter string\n");
     char* string = readString();
     if (checkString(string))
         printf("the entered string is correct\n");
@@ -80,4 +79,3 @@ int main()
     free(string);
     return 0;
 }
-
