@@ -96,5 +96,3 @@ void removeQueue(PriorityQueue* queue)
     }
     free(queue);
 }
-
-
