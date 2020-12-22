@@ -12,7 +12,6 @@ struct PriorityQueue {
     int size;
 };
 
-
 PriorityQueue* createQueue()
 {
     PriorityQueue* queue = (PriorityQueue*)malloc(sizeof(PriorityQueue));
@@ -82,7 +81,6 @@ void enqueue(PriorityQueue* queue, int priority, int value)
     PriorityQueueElement* newElement = createQueueElement(priority, value);
     addElement(queue, newElement);
 }
-
 
 void removeQueue(PriorityQueue* queue)
 {
