@@ -68,3 +68,5 @@ target_link_libraries(test_2.3_new fileProcessing)
 
 add_executable(test_3.1 test_3/test_3.1.c)
 target_link_libraries(test_3.1 avl)
+add_executable(test_3.3 test_3/test_3.3.c)
+target_link_libraries(test_3.3 dfa stringManipulations)
